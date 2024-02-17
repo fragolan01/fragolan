@@ -19,7 +19,12 @@ if ($v7=="despliega") {
 		$data_plataforma_ventas_proveedores0=$line_plataforma_ventas_proveedores["id"];
 		$data_plataforma_ventas_proveedores3=$line_plataforma_ventas_proveedores["nombre"];
 
-		echo "<nobr>".$data_plataforma_ventas_proveedores0.".- (<a href='index.php?v7=actualizar&v13=".$data_plataforma_ventas_proveedores0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".$data_plataforma_ventas_proveedores0."'>Eliminar</a>) Proveedor: Nombre: ".$data_plataforma_ventas_proveedores3."</nobr>";
+		echo "<nobr>".$data_plataforma_ventas_proveedores0.
+		".- (<a href='index.php?v7=actualizar&v13=".
+		$data_plataforma_ventas_proveedores0.
+		"'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
+		$data_plataforma_ventas_proveedores0."'>Eliminar</a>) Proveedor: Nombre: ".
+		$data_plataforma_ventas_proveedores3."</nobr>";
 		echo "<br>";
 	}
 }
