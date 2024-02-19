@@ -14,16 +14,16 @@
     require($laraiz."plataforma_ventas_envios.php");
 
     // alv agrega plataforma ventas marcas
-    // require($laraiz."plataforma_ventas_marcas.php");
+    require($laraiz."plataforma_ventas_marcas.php");
 
     // alv agrega plataforma ventas categos okokok
     require($laraiz."plataforma_ventas_categos.php");
 
     // alv agrega plataforma ventas Sub categos
-    // require($laraiz."plataforma_ventas_sub_categos.php");
+    require($laraiz."plataforma_ventas_sub_categos.php");
 
     // alv agrega plataforma ventas plataformas
-    // require($laraiz."plataforma_ventas_plataformas.php");
+    require($laraiz."plataforma_ventas_plataformas.php");
 
     // alv agrega plataforma ventas plataformasm publicidad
     // require($laraiz."plataforma_ventas_plataformas_publicidad.php");

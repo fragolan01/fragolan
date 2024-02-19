@@ -43,7 +43,7 @@ if ($v7=="despliega") {
         // } 
 }
 
-    $tabla = 'plataforma_ventas_envios';
+    $tabla = 'plataforma_ventas_marcas';
     $sql = "SHOW COLUMNS FROM $tabla";
     $result = $conn->query($sql);
 

@@ -13,17 +13,17 @@ if ($v7=="despliega") {
 	echo "<b>CONSULTA:</b>";
 	echo "<br><br>";
 
-	$query_plataforma_ventas_sub_categos = "SELECT * FROM plataforma_ventas_sub_categos WHERE id_dominio='".$id_dominio."' ORDER BY nombre";
+	$query_plataforma_ventas_sub_categos = "SELECT * FROM plataforma_ventas_sub_categos WHERE id_dominio='".$id_dominio."' ORDER BY sub_catego";
 	$result_plataforma_ventas_sub_categos = mysql_query($query_plataforma_ventas_sub_categos) or die('Query failed: plataforma_ventas_sub_categos ' . mysql_error());
 	while ($line_plataforma_ventas_sub_categos = mysql_fetch_assoc($result_plataforma_ventas_sub_categos)) {
 		$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id"];
-		$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_dominio"];
-		$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_proveedor"];
-		$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_catego"];
-		$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_sub_catego"];
-		$data_plataforma_ventas_sub_categos3=$line_plataforma_ventas_sub_categos["nombre"];
+		$data_plataforma_ventas_sub_categos3=$line_plataforma_ventas_sub_categos["sub_catego"];
 
-		echo "<nobr>".$data_plataforma_ventas_sub_categos0.".- (<a href='index.php?v7=actualizar&v13=".$data_plataforma_ventas_sub_categos0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".$data_plataforma_ventas_sub_categos0."'>Eliminar</a>) Sub Categoria: Nombre: ".$data_plataforma_ventas_sub_categos3."</nobr>";
+		echo "<nobr>".
+		$data_plataforma_ventas_sub_categos0.".- (<a href='index.php?v7=actualizar&v13=".
+		$data_plataforma_ventas_sub_categos0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
+		$data_plataforma_ventas_sub_categos0."'>Eliminar</a>) Sub Categoria: ".
+		$data_plataforma_ventas_sub_categos3."</nobr>";
 		echo "<br>";
 	}
 }
@@ -35,18 +35,15 @@ if ($v7=="actualizar") {
 		echo "<b>ACTUALIZAR:</b>";
 		echo "<br><br>";
 
-		$query_plataforma_ventas_sub_categos = "SELECT id,id_dominio,nombre FROM plataforma_ventas_sub_categos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+		$query_plataforma_ventas_sub_categos = "SELECT id,id_dominio,sub_catego FROM plataforma_ventas_sub_categos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 		$result_plataforma_ventas_sub_categos = mysql_query($query_plataforma_ventas_sub_categos) or die('Query failed: plataforma_ventas_sub_categos ' . mysql_error());
 		while ($line_plataforma_ventas_sub_categos = mysql_fetch_assoc($result_plataforma_ventas_sub_categos)) {
-			$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id"];
-			$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_proveedor"];
-			$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_catego"];
-			$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_sub_catego"];	
-			$data_plataforma_ventas_sub_categos3=$line_plataforma_ventas_sub_categos["nombre"];
-		}
+			$data_plataforma_ventas_sub_categos0=$line_plataforma_ventas_sub_categos["id_dominio"];
+			$data_plataforma_ventas_sub_categos3=$line_plataforma_ventas_sub_categos["sub_catego"];
+			}
 
 		echo "<form name='actualiza_plataforma_ventas_sub_categos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
-			echo "<nobr>Nombre de Sub Categoria: <input type='text' name='nombre' value='".$data_plataforma_ventas_sub_categos3."' size='50'><input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
+			echo "<nobr>Sub Categoria: <input type='text' name='sub_catego' value='".$data_plataforma_ventas_sub_categos3."' size='50'><input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
 		echo "</form>";
 	}
 	else {
@@ -55,7 +52,7 @@ if ($v7=="actualizar") {
 		echo "<br><br>";
 
 		echo "<form name='inserta_plataforma_ventas_sub_categos' method='post' action='index.php?v7=actualizalo'>";
-			echo "<nobr>Nombre de Sub Categoria: <input type='text' name='nombre' value='' size='50'><input type='submit' name='insertar' value='INSERTAR &raquo;'></nobr>";
+			echo "<nobr>sub_catego de Sub Categoria: <input type='text' name='sub_catego' value='' size='50'><input type='submit' name='insertar' value='INSERTAR &raquo;'></nobr>";
 		echo "</form>";
 	}
 }
@@ -65,15 +62,15 @@ if ($v7=="actualizalo") {
 		echo "<b>UPDATE:</b>";
 		echo "<br><br>";
 
-		$nombre=$_POST["nombre"];
-		if (!$nombre) {
-			echo "<font color=red>ERROR! Falta el Nombre...</font>";
+		$sub_catego=$_POST["sub_catego"];
+		if (!$sub_catego) {
+			echo "<font color=red>ERROR! Falta Subcategoria...</font>";
 		}
 		else {
-			$sql_plataforma_ventas_sub_categos = "UPDATE plataforma_ventas_sub_categos SET nombre='".$nombre."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+			$sql_plataforma_ventas_sub_categos = "UPDATE plataforma_ventas_sub_categos SET sub_catego='".$sub_catego."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 			$result_plataforma_ventas_sub_categos= mysql_query($sql_plataforma_ventas_sub_categos);
 
-			echo "<font color=blue>PERFECTO! Sub Categoria actualizado...</font>";
+			echo "<font color=blue>PERFECTO! Sub Categoria actualizada...</font>";
 
 			echo $recargador;
 		}
@@ -83,13 +80,13 @@ if ($v7=="actualizalo") {
 		echo "<b>INSERT:</b>";
 		echo "<br><br>";
 
-		$nombre=$_POST["nombre"];
-		if (!$nombre) {
-			echo "<font color=red>ERROR! Falta el Nombre...</font>";
+		$sub_catego=$_POST["sub_catego"];
+		if (!$sub_catego) {
+			echo "<font color=red>ERROR! Falta el sub_catego...</font>";
 		}
 		else {
 			$id_dominio=$id_dominio;
-			$nombre=$nombre;
+			$sub_catego=$sub_catego;
 			require($laraiz."inserta_plataforma_ventas_sub_categos.php");
 
 			echo "<font color=green>PERFECTO! Sub Categoria insertado...</font>";
@@ -114,7 +111,7 @@ if ($v7=="eliminalo") {
 	$querydel_plataforma_ventas_sub_categos = "DELETE FROM plataforma_ventas_sub_categos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 	$resultdel_plataforma_ventas_sub_categos = mysql_query($querydel_plataforma_ventas_sub_categos);
 
-	echo "<font color=red>LISTO! Sub Categoria eliminado...</font>";
+	echo "<font color=red>LISTO! Sub Categoria eliminada...</font>";
 
 	echo $recargador;
 }

@@ -42,8 +42,6 @@ if ($v7=="actualizar") {
 		while ($line_plataforma_ventas_envios = mysql_fetch_assoc($result_plataforma_ventas_envios)) {
 			$data_plataforma_ventas_envios0=$line_plataforma_ventas_envios["id"];
 			$data_plataforma_ventas_envios3=$line_plataforma_ventas_envios["emvio"];
-			// $data_plataforma_ventas_envios3=$line_plataforma_ventas_envios["costo"];
-			// $data_plataforma_ventas_envios3=$line_plataforma_ventas_envios["moneda"];
 	
 		}
 
