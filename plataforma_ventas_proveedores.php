@@ -10,7 +10,7 @@ if ($v7=="despliega") {
 	echo "<br><br>";
 	echo "<b><a href='index.php?v7=actualizar'>AGREGAR &raquo;</a></b>";
 	echo "<br><br>";
-	echo "<b>CONSULTA:</b>";
+	echo "<b>CONSULTA PROVEEDORES:</b>";
 	echo "<br><br>";
 
 	$query_plataforma_ventas_proveedores = "SELECT * FROM plataforma_ventas_proveedores WHERE id_dominio='".$id_dominio."' ORDER BY nombre";

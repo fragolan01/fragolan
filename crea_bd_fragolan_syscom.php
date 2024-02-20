@@ -43,7 +43,7 @@ if ($v7=="despliega") {
  
 /*      
     // Consulta para eliminar una tabla
-    $tabla = 'plataforma_ventas_marcas';
+    $tabla = 'plataforma_ventas_productos';
     $sql = "DROP TABLE IF EXISTS $tabla";
     if ($conn->query($sql)=== TRUE){
         echo 'La tabla: '.'<strong>'. $tabla.'</strong>'.' se ha eliminado';
@@ -51,6 +51,45 @@ if ($v7=="despliega") {
         echo "Error al eliminar la tabla".$conn-error;
     }
 */
+
+    // Consulta para crear plataforma_ventas_productos
+    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_productos (
+        id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        id_dominio int(11) DEFAULT NULL,
+        id_plataforma int(11) DEFAULT NULL,
+        id_proveedor int(11) DEFAULT NULL,
+        id_marca int(11) DEFAULT NULL,
+        id_catego int(11) DEFAULT NULL,
+        id_sub_catego int(11) DEFAULT NULL,
+        producto text DEFAULT NULL,
+        modelo text DEFAULT NULL,
+        num_piezas int(11) DEFAULT NULL,
+        inventario_minimo int(11) DEFAULT NULL,
+        precio_venta decimal(10,0) DEFAULT NULL,
+        descuento decimal(10,0) DEFAULT NULL,
+        comision_plataforma decimal(10,0) DEFAULT NULL,
+        fijo_plataforma decimal(10,0) DEFAULT NULL,
+        id_campania decimal(10,0) DEFAULT NULL,
+        id_costo_envio int(11) DEFAULT NULL,
+        url_proveedor_1 text DEFAULT NULL,
+        url_proveedor_2 text DEFAULT NULL,
+        url_proveedor_3 text DEFAULT NULL,
+        url_proveedor_4 text DEFAULT NULL,
+        url_proveedor_5 text DEFAULT NULL,
+        url_proveedor_6 text DEFAULT NULL,
+        observaciones text DEFAULT NULL
+    )";
+
+/*
+    // Consulta para crear plataforma_ventas_publicidad
+    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_plataformas_publicidad (
+        id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        id_dominio int(11) DEFAULT NULL,
+        id_plataforma int(11) DEFAULT NULL,
+        id_campania int(11) DEFAULT NULL,
+        publicidad text DEFAULT NULL,
+        acos decimal(10,0) DEFAULT NULL
+    )";
 
 
 
@@ -63,8 +102,6 @@ if ($v7=="despliega") {
         marca text DEFAULT NULL
     )";
 
-
-/*
 
     // Consulta para crear plataforma_ventas_plataformas
     $sql =  "CREATE TABLE IF NOT EXISTS plataforma_ventas_plataformas (
@@ -109,18 +146,6 @@ if ($v7=="despliega") {
         )";
         
 
-
-    // Consulta para crear plataforma_ventas_publicidad
-    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_plataformas_publicidad (
-        id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        id_dominio int(11) DEFAULT NULL,
-        id_plataforma int(11) DEFAULT NULL,
-        id_campania int(11) DEFAULT NULL,
-        nombre text DEFAULT NULL,
-        acos decimal(10,0) DEFAULT NULL
-    )";
-
-
     // Consulta para crear plataforma_ventas_precio
     $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_precio (
         id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -128,35 +153,6 @@ if ($v7=="despliega") {
         id_producto int(11) DEFAULT NULL,
         fecha datetime DEFAULT NULL,
         precio int(11) DEFAULT NULL
-    )";
-
-
-    // Consulta para crear plataforma_ventas_productos
-    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_productos (
-        id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        id_dominio int(11) DEFAULT NULL,
-        id_plataforma int(11) DEFAULT NULL,
-        id_proveedor int(11) DEFAULT NULL,
-        id_marca int(11) DEFAULT NULL,
-        id_catego int(11) DEFAULT NULL,
-        id_sub_catego int(11) DEFAULT NULL,
-        nombre text DEFAULT NULL,
-        modelo text DEFAULT NULL,
-        num_piezas int(11) DEFAULT NULL,
-        inventario_minimo int(11) DEFAULT NULL,
-        precio_venta decimal(10,0) DEFAULT NULL,
-        descuento decimal(10,0) DEFAULT NULL,
-        comision_plataforma decimal(10,0) DEFAULT NULL,
-        fijo_plataforma decimal(10,0) DEFAULT NULL,
-        id_campania decimal(10,0) DEFAULT NULL,
-        id_costo_envio int(11) DEFAULT NULL,
-        url_proveedor_1 text DEFAULT NULL,
-        url_proveedor_2 text DEFAULT NULL,
-        url_proveedor_3 text DEFAULT NULL,
-        url_proveedor_4 text DEFAULT NULL,
-        url_proveedor_5 text DEFAULT NULL,
-        url_proveedor_6 text DEFAULT NULL,
-        observaciones text DEFAULT NULL
     )";
 
 

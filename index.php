@@ -26,19 +26,20 @@
     require($laraiz."plataforma_ventas_plataformas.php");
 
     // alv agrega plataforma ventas plataformasm publicidad
-    // require($laraiz."plataforma_ventas_plataformas_publicidad.php");
+    //ERROR - NO DESGLOSA INSERCIONES
+    require($laraiz."plataforma_ventas_plataformas_publicidad.php");
 
     // alv agrega plataforma_ventas_productos
-    // require($laraiz."plataforma_ventas_productos.php");
+    require($laraiz."plataforma_ventas_productos.php");
 
     // alv agrega plataforma_ventas_stock
-    // require($laraiz."plataforma_ventas_stock.php");
+    require($laraiz."plataforma_ventas_stock.php");
 
     // alv agrega plataforma_ventas_precio
-    // require($laraiz."plataforma_ventas_precio.php");
+    require($laraiz."plataforma_ventas_precio.php");
 
-    // alv agrega plataforma_ventas_precio
-    // require($laraiz."plataforma_ventas_tipo_cambio.php");
+    // alv agrega plataforma_ventas_tipo_de_cambio
+    require($laraiz."plataforma_ventas_tipo_cambio.php");
 
     // alv agrega la consulta de la API SYSCOM
     // require($laraiz."consulta_api.php");

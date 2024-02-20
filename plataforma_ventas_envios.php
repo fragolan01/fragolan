@@ -10,7 +10,7 @@ if ($v7=="despliega") {
 	echo "<br><br>";
 	echo "<b><a href='index.php?v7=actualizar'>AGREGAR &raquo;</a></b>";
 	echo "<br><br>";
-	echo "<b>CONSULTA:</b>";
+	echo "<b>CONSULTA ENVIOS:</b>";
 	echo "<br><br>";
 
 	$query_plataforma_ventas_envios = "SELECT * FROM plataforma_ventas_envios WHERE id_dominio='".$id_dominio."' ORDER BY envio";
