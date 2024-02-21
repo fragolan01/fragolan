@@ -52,6 +52,7 @@ if ($v7=="despliega") {
     }
 */
 
+/*
     // Consulta para crear plataforma_ventas_productos
     $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_productos (
         id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -80,7 +81,7 @@ if ($v7=="despliega") {
         observaciones text DEFAULT NULL
     )";
 
-/*
+
     // Consulta para crear plataforma_ventas_publicidad
     $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_plataformas_publicidad (
         id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
