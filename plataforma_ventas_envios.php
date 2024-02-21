@@ -74,8 +74,8 @@ if ($v7=="actualizar") {
 
 		echo "<form name='inserta_plataforma_ventas_envios' method='post' action='index.php?v7=actualizalo'>";
 			echo "<nobr>
-					Envio: <input type='text' name='envio' value='' size='50'>
-					Costo: <input type='text' name='costo' value='' size='50'>
+						Envio: <input type='text' name='envio' value='' size='50'>
+						Costo: <input type='text' name='costo' value='' size='50'>
 					<input type='submit' name='insertar' value='INSERTAR &raquo;'>
 				</nobr>";
 		echo "</form>";
@@ -88,10 +88,9 @@ if ($v7=="actualizalo") {
 		echo "<b>UPDATE:</b>";
 		echo "<br><br>";
 
-
 		$costo=$_POST['costo'];
 		$envio=$_POST["envio"];
-		if (!$envio and !$costo) {
+		if (!$costo) {
 			echo "<font color=red>ERROR! Falta el Envio y Costo...</font>";
 		}
 		else {
@@ -100,7 +99,10 @@ if ($v7=="actualizalo") {
 			$result_plataforma_ventas_envios= mysql_query($sql_plataforma_ventas_envios);
 			echo "<font color=blue>PERFECTO! Envio actualizado...</font>";
 
+			echo $sql_plataforma_ventas_envios;
+
 			echo $recargador;
+
 		}
 	}
 	else {
@@ -108,9 +110,10 @@ if ($v7=="actualizalo") {
 		echo "<b>INSERT:</b>";
 		echo "<br><br>";
 
-		$costo=$_POST['costo'];
 		$envio=$_POST["envio"];
-		if (!$envio and !$costo) {
+		$costo=$_POST['costo'];
+
+		if (!$costo) {
 			echo "<font color=red>ERROR! Falta el Envio o Costo...</font>";
 		}
 		else {
@@ -144,5 +147,9 @@ if ($v7=="eliminalo") {
 	echo "<font color=red>LISTO! Envio eliminado...</font>";
 
 	echo $recargador;
+
+
 }
+
+
 ?>
