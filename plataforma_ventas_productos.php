@@ -20,6 +20,8 @@ if ($v7=="despliega") {
         $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
         $data_plataforma_ventas_productos3=$line_plataforma_ventas_productos["producto"];
         $data_plataforma_ventas_productos4=$line_plataforma_ventas_productos["modelo"];
+        $data_plataforma_ventas_productos5=$line_plataforma_ventas_productos["num_piezas"];
+
 
 
         echo 
@@ -28,7 +30,9 @@ if ($v7=="despliega") {
                 $data_plataforma_ventas_productos0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
                 $data_plataforma_ventas_productos0."'>Eliminar</a>) Productos: ".
                 $data_plataforma_ventas_productos3." Modelo: ".
-                $data_plataforma_ventas_productos4.
+                $data_plataforma_ventas_productos4. " Num. piezas:".
+                $data_plataforma_ventas_productos5.
+
             "</nobr>";
 
         echo "<br>";
@@ -42,19 +46,22 @@ if ($v7=="actualizar") {
         echo "<b>ACTUALIZAR:</b>";
         echo "<br><br>";
 
-        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
         $result_plataforma_ventas_productos = mysql_query($query_plataforma_ventas_productos) or die('Query failed: plataforma_ventas_productos ' . mysql_error());
         while ($line_plataforma_ventas_productos = mysql_fetch_assoc($result_plataforma_ventas_productos)) {
             $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
             $data_plataforma_ventas_productos3=$line_plataforma_ventas_productos["producto"];
             $data_plataforma_ventas_productos4=$line_plataforma_ventas_productos["modelo"];
+            $data_plataforma_ventas_productos5=$line_plataforma_ventas_productos["num_piezas"];
+
 
 
         echo "<form name='actualiza_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
                 echo "<nobr>
 
                         Producto: <input type='text' name='producto' value='".$data_plataforma_ventas_productos3."' size='50'>
-                        Modelo: <input type='text' name='modelo' value='".$data_plataforma_ventas_productos3."' size='50'>
+                        Modelo: <input type='text' name='modelo' value='".$data_plataforma_ventas_productos4."' size='50'>
+                        Num_piezas: <input type='text' name='num_piezas' value='".$data_plataforma_ventas_productos5."' size='50'>
 
                         <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
                     </nobr>";
@@ -71,6 +78,8 @@ if ($v7=="actualizar") {
             echo "<nobr>
                     Producto: <input type='text' name='producto' value='' size='50'>
                     Modelo: <input type='text' name='modelo' value='' size='50'>
+                    Num. piezas: <input type='text' name='num_piezas' value='' size='50'>
+
                     <input type='submit' name='insertar' value='INSERTAR &raquo;'>
                 </nobr>";
         echo "</form>";
@@ -84,6 +93,7 @@ if ($v7=="actualizalo") {
 
         $producto=$_POST["producto"];
         $modelo=$_POST["modelo"];
+        $num_piezas=$_POST["num_piezas"];
 
         if (!$producto) {
             echo "<font color=red>ERROR! Falta el producto...</font>";
@@ -105,6 +115,7 @@ if ($v7=="actualizalo") {
 
         $producto=$_POST["producto"];
         $modelo=$_POST["modelo"];
+        $num_piezas=$_POST["num_piezas"];
 
         if (!$producto) {
             echo "<font color=red>ERROR! Falta el Producto...</font>";
