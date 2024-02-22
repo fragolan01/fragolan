@@ -24,6 +24,8 @@ if ($v7=="despliega") {
         $data_plataforma_ventas_productos6=$line_plataforma_ventas_productos["inventario_minimo"];
         $data_plataforma_ventas_productos7=$line_plataforma_ventas_productos["precio_venta"];
         $data_plataforma_ventas_productos8=$line_plataforma_ventas_productos["descuento"];
+        $data_plataforma_ventas_productos9=$line_plataforma_ventas_productos["comision_plataforma"];
+
 
 
         echo 
@@ -36,7 +38,8 @@ if ($v7=="despliega") {
                 $data_plataforma_ventas_productos5. " Inventario-minimo: ".
                 $data_plataforma_ventas_productos6. " Precio-venta: ".
                 $data_plataforma_ventas_productos7. " Descuento: ".
-                $data_plataforma_ventas_productos8.
+                $data_plataforma_ventas_productos8. " comision-plataforma: ". 
+                $data_plataforma_ventas_productos9.
 
             "</nobr>";
 
@@ -51,7 +54,7 @@ if ($v7=="actualizar") {
         echo "<b>ACTUALIZAR:</b>";
         echo "<br><br>";
 
-        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas, inventario_minimo, precio_venta, descuento FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas, inventario_minimo, precio_venta, descuento, comision_plataforma FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
         $result_plataforma_ventas_productos = mysql_query($query_plataforma_ventas_productos) or die('Query failed: plataforma_ventas_productos ' . mysql_error());
         while ($line_plataforma_ventas_productos = mysql_fetch_assoc($result_plataforma_ventas_productos)) {
             $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
@@ -61,6 +64,8 @@ if ($v7=="actualizar") {
             $data_plataforma_ventas_productos6=$line_plataforma_ventas_productos["inventario_minimo"];
             $data_plataforma_ventas_productos7=$line_plataforma_ventas_productos["precio_venta"];
             $data_plataforma_ventas_productos8=$line_plataforma_ventas_productos["descuento"];
+            $data_plataforma_ventas_productos9=$line_plataforma_ventas_productos["comision_plataforma"];
+
 
         echo "<form name='actualiza_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
                 echo "<nobr>
@@ -71,6 +76,8 @@ if ($v7=="actualizar") {
                         Inventario-minimo: <input type='text' name='inventario_minimo' value='".$data_plataforma_ventas_productos6."' size='50'>
                         Precio-venta: <input type='text' name='precio_venta' value='".$data_plataforma_ventas_productos7."' size='50'>
                         Descuento: <input type='text' name='descuento' value='".$data_plataforma_ventas_productos8."' size='50'>
+                        Comision plataforma: <input type='text' name='comision_plataforma' value='".$data_plataforma_ventas_productos8."' size='50'>
+
 
                         <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
                     </nobr>";
@@ -91,6 +98,7 @@ if ($v7=="actualizar") {
                     Inventario minimo: <input type='text' name='inventario_minimo' value='' size='50'>
                     Precio venta: <input type='text' name='precio_venta' value='' size='50'>
                     Descuento: <input type='text' name='descuento' value='' size='50'>
+                    Comision plataforma: <input type='text' name='comision_plataforma' value='' size='50'>
 
                     <input type='submit' name='insertar' value='INSERTAR &raquo;'>
                 </nobr>";
@@ -109,13 +117,15 @@ if ($v7=="actualizalo") {
         $inventario_minimo=$_POST["inventario_minimo"];
         $precio_venta=$_POST["precio_venta"];
         $descuento=$_POST["descuento"];
+        $comision_plataforma=$_POST["comision_plataforma"];
+
 
         if (!$producto) {
             echo "<font color=red>ERROR! Falta el producto...</font>";
         }
         else {
 
-            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."', inventario_minimo='".$inventario_minimo."', precio_venta='".$precio_venta."', descuento='".$descuento."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."', inventario_minimo='".$inventario_minimo."', precio_venta='".$precio_venta."', descuento='".$descuento."', comision_plataforma='".$comision_plataforma."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
             $result_plataforma_ventas_productos= mysql_query($sql_plataforma_ventas_productos);
 
             echo "<font color=blue>PERFECTO! Producto actualizado...</font>";
@@ -134,7 +144,7 @@ if ($v7=="actualizalo") {
         $inventario_minimo=$_POST["inventario_minimo"];
         $precio_venta=$_POST["precio_venta"];
         $descuento=$_POST["descuento"];
-
+        $comision_plataforma=$_POST["comision_plataforma"];
 
         if (!$producto) {
             echo "<font color=red>ERROR! Falta el Producto...</font>";
@@ -147,6 +157,8 @@ if ($v7=="actualizalo") {
             $inventario_minimo=$_POST["inventario_minimo"];
             $precio_venta=$_POST["precio_venta"];
             $descuento=$_POST["descuento"];
+            $comision_plataforma=$_POST["comision_plataforma"];
+
     
             require($laraiz."inserta_plataforma_ventas_productos.php");
 
