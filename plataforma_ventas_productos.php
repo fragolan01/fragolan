@@ -104,8 +104,10 @@ if ($v7=="actualizalo") {
         echo "<br><br>";
 
         $producto=$_POST["producto"];
+        $modelo=$_POST["modelo"];
+
         if (!$producto) {
-            echo "<font color=red>ERROR! Falta el producto...</font>";
+            echo "<font color=red>ERROR! Falta el Producto...</font>";
         }
         else {
             $id_dominio=$id_dominio;
