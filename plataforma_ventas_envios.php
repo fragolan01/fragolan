@@ -28,7 +28,7 @@ if ($v7=="despliega") {
 		$data_plataforma_ventas_envios0=$line_plataforma_ventas_envios["id"];
 		$data_plataforma_ventas_envios3=$line_plataforma_ventas_envios["envio"];
 		$data_plataforma_ventas_envios4=$line_plataforma_ventas_envios["costo"];
-
+		$data_plataforma_ventas_envios5=$line_plataforma_ventas_envios["moneda"];
 
 		echo 
 			"<nobr>".
@@ -36,7 +36,8 @@ if ($v7=="despliega") {
 				$data_plataforma_ventas_envios0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
 				$data_plataforma_ventas_envios0."'>Eliminar</a>) Envio ".
 				$data_plataforma_ventas_envios3.  " - Costo: " .
-				$data_plataforma_ventas_envios4.
+				$data_plataforma_ventas_envios4.  " - Moneda: " .
+				$data_plataforma_ventas_envios5.
 
 			"</nobr>";
 		
@@ -51,18 +52,21 @@ if ($v7=="actualizar") {
 		echo "<b>ACTUALIZAR:</b>";
 		echo "<br><br>";
 
-		$query_plataforma_ventas_envios = "SELECT id,id_dominio,envio,costo FROM plataforma_ventas_envios WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+		$query_plataforma_ventas_envios = "SELECT id,id_dominio,envio,costo,moneda FROM plataforma_ventas_envios WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 		$result_plataforma_ventas_envios = mysql_query($query_plataforma_ventas_envios) or die('Query failed: plataforma_ventas_envios ' . mysql_error());
 		while ($line_plataforma_ventas_envios = mysql_fetch_assoc($result_plataforma_ventas_envios)) {
 			$data_plataforma_ventas_envios0=$line_plataforma_ventas_envios["id"];
 			$data_plataforma_ventas_envios3=$line_plataforma_ventas_envios["envio"];
 			$data_plataforma_ventas_envios4=$line_plataforma_ventas_envios["costo"];
+			$data_plataforma_ventas_envios5=$line_plataforma_ventas_envios["moneda"];
+
 		}
 
 		echo "<form name='actualiza_plataforma_ventas_envios' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
 			echo "<nobr>
 					Envio <input type='text' name='envio' value='".$data_plataforma_ventas_envios3."' size='50'>
 					Costo <input type='text' name='costo' value='".$data_plataforma_ventas_envios4."' size='50'>
+					Moneda <input type='text' name='moneda' value='".$data_plataforma_ventas_envios5."' size='50'>
 					<input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
 				</nobr>";
 		echo "</form>";
@@ -76,6 +80,7 @@ if ($v7=="actualizar") {
 			echo "<nobr>
 						Envio: <input type='text' name='envio' value='' size='50'>
 						Costo: <input type='text' name='costo' value='' size='50'>
+						Moneda: <input type='text' name='moneda' value='' size='50'>
 					<input type='submit' name='insertar' value='INSERTAR &raquo;'>
 				</nobr>";
 		echo "</form>";
@@ -90,16 +95,18 @@ if ($v7=="actualizalo") {
 
 		$costo=$_POST['costo'];
 		$envio=$_POST["envio"];
+		$moneda=$_POST["moneda"];
+
 		if (!$costo) {
 			echo "<font color=red>ERROR! Falta el Envio y Costo...</font>";
 		}
 		else {
 			// $sql_plataforma_ventas_envios = "UPDATE plataforma_ventas_envios SET envio='".$envio."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
-			$sql_plataforma_ventas_envios = "UPDATE plataforma_ventas_envios SET envio='".$envio."', costo='".$costo."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+			$sql_plataforma_ventas_envios = "UPDATE plataforma_ventas_envios SET envio='".$envio."', costo='".$costo."', moneda='".$moneda."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 			$result_plataforma_ventas_envios= mysql_query($sql_plataforma_ventas_envios);
 			echo "<font color=blue>PERFECTO! Envio actualizado...</font>";
 
-			echo $sql_plataforma_ventas_envios;
+			// echo $sql_plataforma_ventas_envios;
 
 			echo $recargador;
 
@@ -112,14 +119,16 @@ if ($v7=="actualizalo") {
 
 		$envio=$_POST["envio"];
 		$costo=$_POST['costo'];
+		$moneda=$_POST['moneda'];
 
-		if (!$costo) {
+		if (!$moneda) {
 			echo "<font color=red>ERROR! Falta el Envio o Costo...</font>";
 		}
 		else {
 			$id_dominio=$id_dominio;
 			$envio=$envio;
 			$costo=$costo;
+			$moneda=$moneda;
 			require($laraiz."inserta_plataforma_ventas_envios.php");
 
 			echo "<font color=green>PERFECTO! Envio insertado...</font>";
