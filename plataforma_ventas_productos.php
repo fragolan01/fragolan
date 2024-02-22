@@ -55,7 +55,6 @@ if ($v7=="actualizar") {
             $data_plataforma_ventas_productos5=$line_plataforma_ventas_productos["num_piezas"];
 
 
-
         echo "<form name='actualiza_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
                 echo "<nobr>
 
@@ -100,7 +99,7 @@ if ($v7=="actualizalo") {
         }
         else {
 
-            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
             $result_plataforma_ventas_productos= mysql_query($sql_plataforma_ventas_productos);
 
             echo "<font color=blue>PERFECTO! Producto actualizado...</font>";
