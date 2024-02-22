@@ -28,6 +28,8 @@ if ($v7=="despliega") {
         $data_plataforma_ventas_productos10=$line_plataforma_ventas_productos["fijo_plataforma"];
         $data_plataforma_ventas_productos11=$line_plataforma_ventas_productos["id_campania"];
         $data_plataforma_ventas_productos12=$line_plataforma_ventas_productos["id_costo_envio"];
+        $data_plataforma_ventas_productos13=$line_plataforma_ventas_productos["url_proveedor_1"];
+
 
 
         echo 
@@ -44,7 +46,8 @@ if ($v7=="despliega") {
                 $data_plataforma_ventas_productos9. " Fijo-plataforma: ".
                 $data_plataforma_ventas_productos10. " ID campania: ".
                 $data_plataforma_ventas_productos11. " ID costo-envio: ".
-                $data_plataforma_ventas_productos12.
+                $data_plataforma_ventas_productos12. " URL proveedor-1: ". 
+                $data_plataforma_ventas_productos13.
 
             "</nobr>";
 
@@ -59,7 +62,7 @@ if ($v7=="actualizar") {
         echo "<b>ACTUALIZAR:</b>";
         echo "<br><br>";
 
-        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas, inventario_minimo, precio_venta, descuento, comision_plataforma, fijo_plataforma, id_campania, id_costo_envio FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas, inventario_minimo, precio_venta, descuento, comision_plataforma, fijo_plataforma, id_campania, id_costo_envio, url_proveedor_1 FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
         $result_plataforma_ventas_productos = mysql_query($query_plataforma_ventas_productos) or die('Query failed: plataforma_ventas_productos ' . mysql_error());
         while ($line_plataforma_ventas_productos = mysql_fetch_assoc($result_plataforma_ventas_productos)) {
             $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
@@ -73,6 +76,7 @@ if ($v7=="actualizar") {
             $data_plataforma_ventas_productos10=$line_plataforma_ventas_productos["fijo_plataforma"];
             $data_plataforma_ventas_productos11=$line_plataforma_ventas_productos["id_campania"];
             $data_plataforma_ventas_productos12=$line_plataforma_ventas_productos["id_costo_envio"];
+            $data_plataforma_ventas_productos13=$line_plataforma_ventas_productos["url_proveedor_1"];
 
 
         echo "<form name='actualiza_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
@@ -88,6 +92,7 @@ if ($v7=="actualizar") {
                         Fijo plataforma: <input type='text' name='fijo_plataforma' value='".$data_plataforma_ventas_productos10."' size='50'>
                         ID campania: <input type='text' name='id_campania' value='".$data_plataforma_ventas_productos11."' size='50'>
                         id_costo_envio: <input type='text' name='id_costo_envio' value='".$data_plataforma_ventas_productos12."' size='50'>
+                        URL proveedor-1: <input type='text' name='url_proveedor_1' value='".$data_plataforma_ventas_productos13."' size='50'>
 
 
                         <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
@@ -113,6 +118,7 @@ if ($v7=="actualizar") {
                     Fijo plataforma: <input type='text' name='fijo_plataforma' value='' size='50'>
                     ID campania: <input type='text' name='id_campania' value='' size='50'>
                     ID costo envio: <input type='text' name='id_costo_envio' value='' size='50'>
+                    url_proveedor_1: <input type='text' name='url_proveedor_1' value='' size='50'>
 
 
                     <input type='submit' name='insertar' value='INSERTAR &raquo;'>
@@ -136,6 +142,8 @@ if ($v7=="actualizalo") {
         $fijo_plataforma=$_POST["fijo_plataforma"];
         $id_campania=$_POST["id_campania"];
         $id_costo_envio=$_POST["id_costo_envio"];
+        $url_proveedor_1=$_POST["url_proveedor_1"];
+
 
 
         if (!$producto) {
@@ -143,7 +151,7 @@ if ($v7=="actualizalo") {
         }
         else {
 
-            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."', inventario_minimo='".$inventario_minimo."', precio_venta='".$precio_venta."', descuento='".$descuento."', comision_plataforma='".$comision_plataforma."', fijo_plataforma='".$fijo_plataforma."', id_campania='".$id_campania."', id_costo_envio='".$id_costo_envio."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."', inventario_minimo='".$inventario_minimo."', precio_venta='".$precio_venta."', descuento='".$descuento."', comision_plataforma='".$comision_plataforma."', fijo_plataforma='".$fijo_plataforma."', id_campania='".$id_campania."', id_costo_envio='".$id_costo_envio."', url_proveedor_1='".$url_proveedor_1."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
             $result_plataforma_ventas_productos= mysql_query($sql_plataforma_ventas_productos);
 
             echo "<font color=blue>PERFECTO! Producto actualizado...</font>";
@@ -166,6 +174,8 @@ if ($v7=="actualizalo") {
         $fijo_plataforma=$_POST["fijo_plataforma"];
         $id_campania=$_POST["id_campania"];
         $id_costo_envio=$_POST["id_costo_envio"];
+        $url_proveedor_1=$_POST["url_proveedor_1"];
+
 
 
         if (!$producto) {
@@ -183,7 +193,7 @@ if ($v7=="actualizalo") {
             $fijo_plataforma=$_POST["fijo_plataforma"];
             $id_campania=$_POST["id_campania"];
             $id_costo_envio=$_POST["id_costo_envio"];
-
+            $url_proveedor_1=$_POST["url_proveedor_1"];
 
                 require($laraiz."inserta_plataforma_ventas_productos.php");
 
