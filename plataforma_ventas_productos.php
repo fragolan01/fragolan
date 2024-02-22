@@ -19,11 +19,18 @@ if ($v7=="despliega") {
 
         $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
         $data_plataforma_ventas_productos3=$line_plataforma_ventas_productos["producto"];
+        $data_plataforma_ventas_productos4=$line_plataforma_ventas_productos["modelo"];
 
-        echo "<nobr>".$data_plataforma_ventas_productos0.".- (<a href='index.php?v7=actualizar&v13=".
-        $data_plataforma_ventas_productos0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
-        $data_plataforma_ventas_productos0."'>Eliminar</a>) Productos: ".
-        $data_plataforma_ventas_productos3."</nobr>";
+
+        echo 
+            "<nobr>".
+                $data_plataforma_ventas_productos0.".- (<a href='index.php?v7=actualizar&v13=".
+                $data_plataforma_ventas_productos0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
+                $data_plataforma_ventas_productos0."'>Eliminar</a>) Productos: ".
+                $data_plataforma_ventas_productos3." Modelo: ".
+                $data_plataforma_ventas_productos4.
+            "</nobr>";
+
         echo "<br>";
     }
 }
