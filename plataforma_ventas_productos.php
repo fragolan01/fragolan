@@ -42,14 +42,22 @@ if ($v7=="actualizar") {
         echo "<b>ACTUALIZAR:</b>";
         echo "<br><br>";
 
-        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
         $result_plataforma_ventas_productos = mysql_query($query_plataforma_ventas_productos) or die('Query failed: plataforma_ventas_productos ' . mysql_error());
         while ($line_plataforma_ventas_productos = mysql_fetch_assoc($result_plataforma_ventas_productos)) {
             $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
             $data_plataforma_ventas_productos3=$line_plataforma_ventas_productos["producto"];
+            $data_plataforma_ventas_productos4=$line_plataforma_ventas_productos["modelo"];
+
 
         echo "<form name='actualiza_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
-            echo "<nobr>producto del Producto: <input type='text' name='producto' value='".$data_plataforma_ventas_productos3."' size='50'><input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
+                echo "<nobr>
+
+                        Producto: <input type='text' name='producto' value='".$data_plataforma_ventas_productos3."' size='50'>
+                        Modelo: <input type='text' name='modelo' value='".$data_plataforma_ventas_productos3."' size='50'>
+
+                        <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
+                    </nobr>";
         echo "</form>";
     }
 
@@ -60,7 +68,11 @@ if ($v7=="actualizar") {
         echo "<br><br>";
 
         echo "<form name='inserta_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo'>";
-            echo "<nobr>producto del Producto: <input type='text' name='producto' value='' size='50'><input type='submit' name='insertar' value='INSERTAR &raquo;'></nobr>";
+            echo "<nobr>
+                    Producto: <input type='text' name='producto' value='' size='50'>
+                    Modelo: <input type='text' name='modelo' value='' size='50'>
+                    <input type='submit' name='insertar' value='INSERTAR &raquo;'>
+                </nobr>";
         echo "</form>";
     }
 }
@@ -71,14 +83,17 @@ if ($v7=="actualizalo") {
         echo "<br><br>";
 
         $producto=$_POST["producto"];
+        $modelo=$_POST["modelo"];
+
         if (!$producto) {
             echo "<font color=red>ERROR! Falta el producto...</font>";
         }
         else {
-            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+
+            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
             $result_plataforma_ventas_productos= mysql_query($sql_plataforma_ventas_productos);
 
-            echo "<font color=blue>PERFECTO! Provducto actualizado...</font>";
+            echo "<font color=blue>PERFECTO! Producto actualizado...</font>";
 
             echo $recargador;
         }
