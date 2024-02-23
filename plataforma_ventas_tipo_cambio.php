@@ -22,6 +22,8 @@ if ($v7=="despliega") {
 		$data_plataforma_ventas_tipo_cambio5=$line_plataforma_ventas_tipo_cambio["preferencial"];
 		$data_plataforma_ventas_tipo_cambio6=$line_plataforma_ventas_tipo_cambio["un_dia"];
 		$data_plataforma_ventas_tipo_cambio7=$line_plataforma_ventas_tipo_cambio["una_semana"];
+		$data_plataforma_ventas_tipo_cambio8=$line_plataforma_ventas_tipo_cambio["dos_semanas"];
+
 
 
 		echo 
@@ -33,7 +35,8 @@ if ($v7=="despliega") {
 				$data_plataforma_ventas_tipo_cambio4. " Preferencial: ".
 				$data_plataforma_ventas_tipo_cambio5. " Un dia: ".
 				$data_plataforma_ventas_tipo_cambio6. " Una semana: ".
-				$data_plataforma_ventas_tipo_cambio7.
+				$data_plataforma_ventas_tipo_cambio7. " Dos semanas".
+				$data_plataforma_ventas_tipo_cambio8.
 			"</nobr>";
 		echo "<br>";
 	}
