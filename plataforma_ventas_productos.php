@@ -34,6 +34,8 @@ if ($v7=="despliega") {
         $data_plataforma_ventas_productos16=$line_plataforma_ventas_productos["url_proveedor_4"];
         $data_plataforma_ventas_productos17=$line_plataforma_ventas_productos["url_proveedor_5"];
         $data_plataforma_ventas_productos18=$line_plataforma_ventas_productos["url_proveedor_6"];
+        $data_plataforma_ventas_productos19=$line_plataforma_ventas_productos["observaciones"];
+
 
 
 
@@ -57,8 +59,8 @@ if ($v7=="despliega") {
                 $data_plataforma_ventas_productos15. " URL proveedor-4: ".
                 $data_plataforma_ventas_productos16. " URL proveedor-5: ".
                 $data_plataforma_ventas_productos17. " URL proveedor-6: ".
-                $data_plataforma_ventas_productos18.
-
+                $data_plataforma_ventas_productos18. "Observaciones: ".
+                $data_plataforma_ventas_productos19.
 
             "</nobr>";
 
@@ -73,7 +75,7 @@ if ($v7=="actualizar") {
         echo "<b>ACTUALIZAR:</b>";
         echo "<br><br>";
 
-        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas, inventario_minimo, precio_venta, descuento, comision_plataforma, fijo_plataforma, id_campania, id_costo_envio, url_proveedor_1, url_proveedor_2, url_proveedor_3, url_proveedor_4, url_proveedor_5, url_proveedor_6 FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+        $query_plataforma_ventas_productos = "SELECT id, id_dominio, producto, modelo, num_piezas, inventario_minimo, precio_venta, descuento, comision_plataforma, fijo_plataforma, id_campania, id_costo_envio, url_proveedor_1, url_proveedor_2, url_proveedor_3, url_proveedor_4, url_proveedor_5, url_proveedor_6, observaciones FROM plataforma_ventas_productos WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
         $result_plataforma_ventas_productos = mysql_query($query_plataforma_ventas_productos) or die('Query failed: plataforma_ventas_productos ' . mysql_error());
         while ($line_plataforma_ventas_productos = mysql_fetch_assoc($result_plataforma_ventas_productos)) {
             $data_plataforma_ventas_productos0=$line_plataforma_ventas_productos["id"];
@@ -93,6 +95,8 @@ if ($v7=="actualizar") {
             $data_plataforma_ventas_productos16=$line_plataforma_ventas_productos["url_proveedor_4"];
             $data_plataforma_ventas_productos17=$line_plataforma_ventas_productos["url_proveedor_5"];
             $data_plataforma_ventas_productos18=$line_plataforma_ventas_productos["url_proveedor_6"];
+            $data_plataforma_ventas_productos19=$line_plataforma_ventas_productos["observaciones"];
+
 
 
         echo "<form name='actualiza_plataforma_ventas_productos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
@@ -114,7 +118,7 @@ if ($v7=="actualizar") {
                         URL proveedor-4: <input type='text' name='url_proveedor_4' value='".$data_plataforma_ventas_productos16."' size='50'>
                         URL proveedor-5: <input type='text' name='url_proveedor_5' value='".$data_plataforma_ventas_productos17."' size='50'>
                         URL proveedor-6: <input type='text' name='url_proveedor_6' value='".$data_plataforma_ventas_productos18."' size='50'>
-
+                        Observaciones: <input type='text' name='observaciones' value='".$data_plataforma_ventas_productos19."' size='50'>
 
                         <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
                     </nobr>";
@@ -145,6 +149,8 @@ if ($v7=="actualizar") {
                     url_proveedor_4: <input type='text' name='url_proveedor_4' value='' size='50'>
                     url_proveedor_5: <input type='text' name='url_proveedor_5' value='' size='50'>
                     url_proveedor_6: <input type='text' name='url_proveedor_6' value='' size='50'>
+                    observaciones: <input type='text' name='observaciones' value='' size='50'>
+
 
                     <input type='submit' name='insertar' value='INSERTAR &raquo;'>
                 </nobr>";
@@ -173,6 +179,7 @@ if ($v7=="actualizalo") {
         $url_proveedor_4=$_POST["url_proveedor_4"];
         $url_proveedor_5=$_POST["url_proveedor_5"];
         $url_proveedor_6=$_POST["url_proveedor_6"];
+        $observaciones=$_POST["observaciones"];
 
 
 
@@ -181,7 +188,7 @@ if ($v7=="actualizalo") {
         }
         else {
 
-            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."', inventario_minimo='".$inventario_minimo."', precio_venta='".$precio_venta."', descuento='".$descuento."', comision_plataforma='".$comision_plataforma."', fijo_plataforma='".$fijo_plataforma."', id_campania='".$id_campania."', id_costo_envio='".$id_costo_envio."', url_proveedor_1='".$url_proveedor_1."', url_proveedor_2='".$url_proveedor_2."', url_proveedor_3='".$url_proveedor_3."', url_proveedor_4='".$url_proveedor_4."', url_proveedor_5='".$url_proveedor_5."', url_proveedor_6='".$url_proveedor_6."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+            $sql_plataforma_ventas_productos = "UPDATE plataforma_ventas_productos SET producto='".$producto."', modelo='".$modelo."', num_piezas='".$num_piezas."', inventario_minimo='".$inventario_minimo."', precio_venta='".$precio_venta."', descuento='".$descuento."', comision_plataforma='".$comision_plataforma."', fijo_plataforma='".$fijo_plataforma."', id_campania='".$id_campania."', id_costo_envio='".$id_costo_envio."', url_proveedor_1='".$url_proveedor_1."', url_proveedor_2='".$url_proveedor_2."', url_proveedor_3='".$url_proveedor_3."', url_proveedor_4='".$url_proveedor_4."', url_proveedor_5='".$url_proveedor_5."', url_proveedor_6='".$url_proveedor_6."', observaciones='".$observaciones."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
             $result_plataforma_ventas_productos= mysql_query($sql_plataforma_ventas_productos);
 
             echo "<font color=blue>PERFECTO! Producto actualizado...</font>";
@@ -210,6 +217,8 @@ if ($v7=="actualizalo") {
         $url_proveedor_4=$_POST["url_proveedor_4"];
         $url_proveedor_5=$_POST["url_proveedor_5"];
         $url_proveedor_6=$_POST["url_proveedor_6"];
+        $observaciones=$_POST["observaciones"];
+
 
 
         if (!$producto) {
@@ -233,8 +242,7 @@ if ($v7=="actualizalo") {
             $url_proveedor_4=$_POST["url_proveedor_4"];
             $url_proveedor_5=$_POST["url_proveedor_5"];
             $url_proveedor_6=$_POST["url_proveedor_6"];
-
-
+            $observaciones=$_POST["observaciones"];
 
                require($laraiz."inserta_plataforma_ventas_productos.php");
 
