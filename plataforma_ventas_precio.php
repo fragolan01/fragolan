@@ -18,12 +18,17 @@ if ($v7=="despliega") {
 	while ($line_plataforma_ventas_precio = mysql_fetch_assoc($result_plataforma_ventas_precio)) {
 		$data_plataforma_ventas_precio0=$line_plataforma_ventas_precio["id"];
         $data_plataforma_ventas_precio3=$line_plataforma_ventas_precio["precio"];
+		$data_plataforma_ventas_precio4=$line_plataforma_ventas_precio["fecha"];
+
 
 		echo "<nobr>".
-		$data_plataforma_ventas_precio0.".- (<a href='index.php?v7=actualizar&v13=".
-		$data_plataforma_ventas_precio0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
-		$data_plataforma_ventas_precio0."'>Eliminar</a>) Precio:  ".
-		$data_plataforma_ventas_precio3."</nobr>";
+					$data_plataforma_ventas_precio0.".- (<a href='index.php?v7=actualizar&v13=".
+					$data_plataforma_ventas_precio0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
+					$data_plataforma_ventas_precio0."'>Eliminar</a>) Precio:  ".
+					$data_plataforma_ventas_precio3. " Fecha: ".
+					$data_plataforma_ventas_precio4.
+				"</nobr>";
+
 		echo "<br>";
 	}
 }
@@ -35,16 +40,21 @@ if ($v7=="actualizar") {
 		echo "<b>ACTUALIZAR:</b>";
 		echo "<br><br>";
 
-		$query_plataforma_ventas_precio = "SELECT id,id_dominio,precio FROM plataforma_ventas_precio WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+		$query_plataforma_ventas_precio = "SELECT id,id_dominio,precio,fecha FROM plataforma_ventas_precio WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 		$result_plataforma_ventas_precio = mysql_query($query_plataforma_ventas_precio) or die('Query failed: plataforma_ventas_precio ' . mysql_error());
 		while ($line_plataforma_ventas_precio = mysql_fetch_assoc($result_plataforma_ventas_precio)) {
             $data_plataforma_ventas_precio0=$line_plataforma_ventas_precio["id"];
             $data_plataforma_ventas_precio3=$line_plataforma_ventas_precio["precio"];
+			$data_plataforma_ventas_precio4=$line_plataforma_ventas_precio["fecha"];
     
         }
 
 		echo "<form name='actualiza_plataforma_ventas_precio' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
-			echo "<nobr>Precio: <input type='text' name='nprecio' value='".$data_plataforma_ventas_precio3."' size='50'><input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
+			echo "<nobr>
+					Precio: <input type='text' name='nprecio' value='".$data_plataforma_ventas_precio3."' size='50'>
+					Fecha: <input type='date' name='fecha' value='".$data_plataforma_ventas_precio4."' size='50'>
+
+					<input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
 		echo "</form>";
 	}
 	else {
@@ -53,7 +63,12 @@ if ($v7=="actualizar") {
 		echo "<br><br>";
 
 		echo "<form name='inserta_plataforma_ventas_precio' method='post' action='index.php?v7=actualizalo'>";
-			echo "<nobr>Precio: <input type='text' name='precio' value='' size='50'><input type='submit' name='insertar' value='INSERTAR &raquo;'></nobr>";
+				echo "<nobr>
+						Precio: <input type='text' name='precio' value='' size='50'>
+						Fecha: <input type='date' name='fecha' value='' size='50'>
+
+						<input type='submit' name='insertar' value='INSERTAR &raquo;'>
+					  </nobr>";
 		echo "</form>";
 	}
 }
@@ -64,11 +79,13 @@ if ($v7=="actualizalo") {
 		echo "<br><br>";
 
 		$precio=$_POST["precio"];
+		$fecha=$_POST["fecha"];
+
 		if (!$precio) {
 			echo "<font color=red>ERROR! Falta el Precio...</font>";
 		}
 		else {
-			$sql_plataforma_ventas_precio = "UPDATE plataforma_ventas_precio SET nprecio'".$precio."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+			$sql_plataforma_ventas_precio = "UPDATE plataforma_ventas_precio SET nprecio'".$precio."',  fecha'".$fecha."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 			$result_plataforma_ventas_precio= mysql_query($sql_plataforma_ventas_precio);
 
 			echo "<font color=blue>PERFECTO! Precio actualizado...</font>";
@@ -82,12 +99,16 @@ if ($v7=="actualizalo") {
 		echo "<br><br>";
 
 		$precio=$_POST["precio"];
+		$fecha=$_POST["fecha"];
+
 		if (!$precio) {
 			echo "<font color=red>ERROR! Falta el Precio...</font>";
 		}
 		else {
 			$id_dominio=$id_dominio;
 			$precio=$precio;
+			$fecha=$fecha;
+
 			require($laraiz."inserta_plataforma_ventas_precio.php");
 
 			echo "<font color=green>PERFECTO! Precio insertado...</font>";
