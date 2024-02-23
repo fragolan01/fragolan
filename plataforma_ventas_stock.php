@@ -52,10 +52,11 @@ if ($v7=="actualizar") {
 
         echo "<form name='actualiza_plataforma_ventas_stock' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
             echo "<nobr>
-                    Stock: <input type='text' name='stock' value='".$data_plataforma_ventas_stock3."' size='50'>
-                    Fecha: <input type='date' fecha='stock' value='".$data_plataforma_ventas_stock4."' size='50'>
+                        Stock: <input type='text' name='stock' value='".$data_plataforma_ventas_stock3."' size='50'>
+                        Fecha: <input type='date' name='fecha' value='".$data_plataforma_ventas_stock4."' size='50'>
 
-                    <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
+                        <input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'>
+                </nobr>";
         echo "</form>";
     }
     else {
