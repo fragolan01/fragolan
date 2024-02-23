@@ -17,13 +17,17 @@ if ($v7=="despliega") {
 	$result_plataforma_ventas_tipo_cambio = mysql_query($query_plataforma_ventas_tipo_cambio) or die('Query failed: plataforma_ventas_tipo_cambio ' . mysql_error());
 	while ($line_plataforma_ventas_tipo_cambio = mysql_fetch_assoc($result_plataforma_ventas_tipo_cambio)) {
 		$data_plataforma_ventas_tipo_cambio0=$line_plataforma_ventas_tipo_cambio["id"];
-		$data_plataforma_ventas_tipo_cambio3=$line_plataforma_ventas_tipo_cambio["normal"];
+		$data_plataforma_ventas_tipo_cambio3=$line_plataforma_ventas_tipo_cambio["fecha"];
+		$data_plataforma_ventas_tipo_cambio4=$line_plataforma_ventas_tipo_cambio["normal"];
 
-		echo "<nobr>".
-		$data_plataforma_ventas_tipo_cambio0.".- (<a href='index.php?v7=actualizar&v13=".
-		$data_plataforma_ventas_tipo_cambio0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
-		$data_plataforma_ventas_tipo_cambio0."'>Eliminar</a>) Tipo de cambio ".
-		$data_plataforma_ventas_tipo_cambio3."</nobr>";
+		echo 
+			"<nobr>".
+				$data_plataforma_ventas_tipo_cambio0.".- (<a href='index.php?v7=actualizar&v13=".
+				$data_plataforma_ventas_tipo_cambio0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
+				$data_plataforma_ventas_tipo_cambio0."'>Eliminar</a>) Fecha: ".
+				$data_plataforma_ventas_tipo_cambio3. "T.C Normal: ",
+				$data_plataforma_ventas_tipo_cambio4. 
+			"</nobr>";
 		echo "<br>";
 	}
 }
