@@ -53,7 +53,7 @@ if ($v7=="actualizar") {
 		echo "<b>ACTUALIZAR:</b>";
 		echo "<br><br>";
 
-		$query_plataforma_ventas_tipo_cambio = "SELECT id,id_dominio,fecha,normal,preferencial,un_dia,una_semana,dos_semanas FROM plataforma_ventas_tipo_cambio WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+		$query_plataforma_ventas_tipo_cambio = "SELECT id,id_dominio,fecha,normal,preferencial,un_dia,una_semana,dos_semanas,tres_semanas FROM plataforma_ventas_tipo_cambio WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 		$result_plataforma_ventas_tipo_cambio = mysql_query($query_plataforma_ventas_tipo_cambio) or die('Query failed: plataforma_ventas_tipo_cambio ' . mysql_error());
 		while ($line_plataforma_ventas_tipo_cambio = mysql_fetch_assoc($result_plataforma_ventas_tipo_cambio)) {
 			$data_plataforma_ventas_tipo_cambio0=$line_plataforma_ventas_tipo_cambio["id"];
@@ -63,7 +63,7 @@ if ($v7=="actualizar") {
 			$data_plataforma_ventas_tipo_cambio6=$line_plataforma_ventas_tipo_cambio["un_dia"];
 			$data_plataforma_ventas_tipo_cambio7=$line_plataforma_ventas_tipo_cambio["una_semana"];
 			$data_plataforma_ventas_tipo_cambio8=$line_plataforma_ventas_tipo_cambio["dos_semanas"];
-
+			$data_plataforma_ventas_tipo_cambio8=$line_plataforma_ventas_tipo_cambio["tres_semanas"];
 
 		}
 
@@ -75,6 +75,7 @@ if ($v7=="actualizar") {
 					Un dia: <input type='text' name='un_dia' value='".$data_plataforma_ventas_tipo_cambio6."' size='50'>
 					una_semana: <input type='text' name='una_semana' value='".$data_plataforma_ventas_tipo_cambio7."' size='50'>
 					Dos semanas: <input type='text' name='dos_semanas' value='".$data_plataforma_ventas_tipo_cambio8."' size='50'>
+					tres_semanas: <input type='text' name='tres_semanas' value='".$data_plataforma_ventas_tipo_cambio9."' size='50'>
 
 					<input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
 		echo "</form>";
@@ -92,6 +93,7 @@ if ($v7=="actualizar") {
 					Un dia: <input type='text' name='un_dia' value='' size='50'>
 					Una semana: <input type='text' name='una_semana' value='' size='50'>
 					Dos semanas: <input type='text' name='dos_semanas' value='' size='50'>
+					Tres semanas: <input type='text' name='tres_semanas' value='' size='50'>
 
 					<input type='submit' name='insertar' value='INSERTAR &raquo;'></nobr>";
 		echo "</form>";
@@ -109,12 +111,13 @@ if ($v7=="actualizalo") {
 		$un_dia=$_POST["un_dia"];
 		$una_semana=$_POST["una_semana"];
 		$dos_semanas=$_POST["dos_semanas"];
+		$tres_semanas=$_POST["tres_semanas"];
 
 		if (!$normal) {
 			echo "<font color=red>ERROR! Falta el tipo de cambio...</font>";
 		}
 		else {
-			$sql_plataforma_ventas_tipo_cambio = "UPDATE plataforma_ventas_tipo_cambio SET fecha='".$fecha."', normal='".$normal."', preferencial='".$preferencial."', un_dia='".$un_dia."', una_semana='".$una_semana."', dos_semanas='".$dos_semanas."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+			$sql_plataforma_ventas_tipo_cambio = "UPDATE plataforma_ventas_tipo_cambio SET fecha='".$fecha."', normal='".$normal."', preferencial='".$preferencial."', un_dia='".$un_dia."', una_semana='".$una_semana."', dos_semanas='".$dos_semanas."', tres_semanas='".$tres_semanas."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 			$result_plataforma_ventas_tipo_cambio= mysql_query($sql_plataforma_ventas_tipo_cambio);
 
 			echo "<font color=blue>PERFECTO! Tipo de cambio...</font>";
@@ -133,7 +136,7 @@ if ($v7=="actualizalo") {
 		$un_dia=$_POST["un_dia"];
 		$una_semana=$_POST["una_semana"];
 		$dos_semanas=$_POST["dos_semanas"];
-
+		$tres_semanas=$_POST["tres_semanas"];
 
 		if (!$normal) {
 			echo "<font color=red>ERROR! Falta el Tipo de cambio...</font>";
@@ -146,6 +149,7 @@ if ($v7=="actualizalo") {
 			$un_dia=$un_dia;
 			$una_semana=$una_semana;
 			$dos_semanas=$dos_semanas;
+			$tres_semanas=$tres_semanas;
 
 			require($laraiz."inserta_plataforma_ventas_tipo_cambio.php");
 
