@@ -19,14 +19,17 @@ if ($v7=="despliega") {
 		$data_plataforma_ventas_tipo_cambio0=$line_plataforma_ventas_tipo_cambio["id"];
 		$data_plataforma_ventas_tipo_cambio3=$line_plataforma_ventas_tipo_cambio["fecha"];
 		$data_plataforma_ventas_tipo_cambio4=$line_plataforma_ventas_tipo_cambio["normal"];
+		$data_plataforma_ventas_tipo_cambio5=$line_plataforma_ventas_tipo_cambio["preferencial"];
+
 
 		echo 
 			"<nobr>".
 				$data_plataforma_ventas_tipo_cambio0.".- (<a href='index.php?v7=actualizar&v13=".
 				$data_plataforma_ventas_tipo_cambio0."'>Actualizar</a> | <a href='index.php?v7=eliminar&v13=".
 				$data_plataforma_ventas_tipo_cambio0."'>Eliminar</a>) Fecha: ".
-				$data_plataforma_ventas_tipo_cambio3. "T.C Normal: ",
-				$data_plataforma_ventas_tipo_cambio4. 
+				$data_plataforma_ventas_tipo_cambio3. "T.C Normal: ".
+				$data_plataforma_ventas_tipo_cambio4. " Preferencial: ".
+				$data_plataforma_ventas_tipo_cambio5.
 			"</nobr>";
 		echo "<br>";
 	}
@@ -40,12 +43,13 @@ if ($v7=="actualizar") {
 		echo "<b>ACTUALIZAR:</b>";
 		echo "<br><br>";
 
-		$query_plataforma_ventas_tipo_cambio = "SELECT id,id_dominio,fecha,normal FROM plataforma_ventas_tipo_cambio WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+		$query_plataforma_ventas_tipo_cambio = "SELECT id,id_dominio,fecha,normal,preferencial FROM plataforma_ventas_tipo_cambio WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 		$result_plataforma_ventas_tipo_cambio = mysql_query($query_plataforma_ventas_tipo_cambio) or die('Query failed: plataforma_ventas_tipo_cambio ' . mysql_error());
 		while ($line_plataforma_ventas_tipo_cambio = mysql_fetch_assoc($result_plataforma_ventas_tipo_cambio)) {
 			$data_plataforma_ventas_tipo_cambio0=$line_plataforma_ventas_tipo_cambio["id"];
 			$data_plataforma_ventas_tipo_cambio3=$line_plataforma_ventas_tipo_cambio["fecha"];
 			$data_plataforma_ventas_tipo_cambio4=$line_plataforma_ventas_tipo_cambio["normal"];
+			$data_plataforma_ventas_tipo_cambio5=$line_plataforma_ventas_tipo_cambio["preferencial"];
 
 		}
 
@@ -53,6 +57,7 @@ if ($v7=="actualizar") {
 			echo "<nobr>
 					Fecha: <input type='date' name='fecha' value='".$data_plataforma_ventas_tipo_cambio3."' size='50'>
 					T.C Normal: <input type='text' name='normal' value='".$data_plataforma_ventas_tipo_cambio4."' size='50'>
+					Preferencial: <input type='text' name='preferencial' value='".$data_plataforma_ventas_tipo_cambio5."' size='50'>
 
 					<input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
 		echo "</form>";
@@ -66,6 +71,7 @@ if ($v7=="actualizar") {
 			echo "<nobr>
 					Fecha: <input type='date' name='fecha' value='' size='50'>
 					Normal: <input type='text' name='normal' value='' size='50'>
+					preferencial: <input type='text' name='preferencial' value='' size='50'>
 
 					<input type='submit' name='insertar' value='INSERTAR &raquo;'></nobr>";
 		echo "</form>";
@@ -79,11 +85,13 @@ if ($v7=="actualizalo") {
 
 		$fecha=$_POST["fecha"];
 		$normal=$_POST["normal"];
+		$preferencial=$_POST["preferencial"];
+
 		if (!$normal) {
 			echo "<font color=red>ERROR! Falta el tipo de cambio...</font>";
 		}
 		else {
-			$sql_plataforma_ventas_tipo_cambio = "UPDATE plataforma_ventas_tipo_cambio SET fecha='".$fecha."', normal='".$normal."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
+			$sql_plataforma_ventas_tipo_cambio = "UPDATE plataforma_ventas_tipo_cambio SET fecha='".$fecha."', normal='".$normal."', preferencial='".$preferencial."' WHERE id='".$v13."' AND id_dominio='".$id_dominio."'";
 			$result_plataforma_ventas_tipo_cambio= mysql_query($sql_plataforma_ventas_tipo_cambio);
 
 			echo "<font color=blue>PERFECTO! Tipo de cambio...</font>";
@@ -98,6 +106,8 @@ if ($v7=="actualizalo") {
 
 		$fecha=$_POST["fecha"];
 		$normal=$_POST["normal"];
+		$preferencial=$_POST["preferencial"];
+
 		if (!$normal) {
 			echo "<font color=red>ERROR! Falta el Tipo de cambio...</font>";
 		}
@@ -105,6 +115,7 @@ if ($v7=="actualizalo") {
 			$id_dominio=$id_dominio;
 			$fecha=$fecha;
 			$normal=$normal;
+			$preferencial=$preferencial;
 			require($laraiz."inserta_plataforma_ventas_tipo_cambio.php");
 
 			echo "<font color=green>PERFECTO! Tipo de cambio insertado...</font>";
