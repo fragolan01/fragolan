@@ -3,10 +3,15 @@
     require($laraiz."config.php");
 
     // alv agrega la consulta de la API SYSCOM
-    // require($laraiz."crea_bd_fragolan_syscom.php");
+    // require($laraiz."crea_bd_api_syscom.php");
     // require($laraiz."consulta_tablas.php");
+    // require($laraiz."esquema_plataforma.php");
+
+    //Consulta productos
+    require($laraiz."productos.php");
 
 
+/*
     // Francisco
     require($laraiz."plataforma_ventas_proveedores.php");
 
@@ -40,10 +45,7 @@
 
     // alv agrega plataforma_ventas_tipo_de_cambio
     require($laraiz."plataforma_ventas_tipo_cambio.php");
-
-    // alv agrega la consulta de la API SYSCOM
-    // require($laraiz."consulta_api.php");
-
+*/
 
     echo "<br><br><font size=1>Copyright: Fragolan LP 2024</font>";
 
