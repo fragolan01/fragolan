@@ -48,9 +48,6 @@ $context = stream_context_create($options);
 // Verificar si el archivo se abrió correctamente
 if ($manejador) {
 
-    // Inicializar el contador en 1
-    $cont = 1;
-
     // Leer el archivo línea por línea
     while (($linea = fgets($manejador)) !== false) {
 
@@ -64,10 +61,6 @@ if ($manejador) {
             $producto_id = trim($partes[1]);
             $ìnv_minimo = trim($partes[2]);
             
-
-            // Verificar si la serie coincide con el contador actual
-            if ($orden[0] == $cont) {
-
                 // Construye la URL de la API con el producto_id actual
                 $api_url = "https://developers.syscom.mx/api/v1/productos/".$producto_id;
                 // Realiza la consulta a la API con el token de autenticación
@@ -81,20 +74,20 @@ if ($manejador) {
                     // Procesa los datos recibidos
                     $data = json_decode($response, true);
 
-                        // ***PRECIO
-                        $array = json_decode($response, true);
-                        $precios = $array['precios']; 
+                    // ***PRECIO
+                    $array = json_decode($response, true);
+                    $precios = $array['precios']; 
 
-                        // ***PRECIO
-                        if (is_array($precios) && array_key_exists('precio_descuento', $precios)) {
-                            // Guarda el precio_descuento para imprimirlo al final
-                            $precio_descuento = $precios['precio_descuento'];
-                        } else {
-                            echo "No se pudo acceder al precio de descuento.<br>";
-                        }
-                
-                        // Verifica si la decodificación tuvo éxito
-                        if ($data === null) {
+                    // ***PRECIO
+                    if (is_array($precios) && array_key_exists('precio_descuento', $precios)) {
+                        // Guarda el precio_descuento para imprimirlo al final
+                        $precio_descuento = $precios['precio_descuento'];
+                    } else {
+                        echo "No se pudo acceder al precio de descuento.<br>";
+                    }
+            
+                    // Verifica si la decodificación tuvo éxito
+                    if ($data === null) {
                         echo "Error al decodificar el JSON para el producto_id $producto_id<br>";
                     } else {
                         // Accede a los datos y muestra la información
@@ -110,58 +103,20 @@ if ($manejador) {
 
                         // Valida producto ACTIVO o en PAUSA
                         if($int_stock < $ìnv_minimo){
-                            $status = 0;
-                            echo 'PAUSA'.'<br>';
+                                $status = 0;
+                                echo 'PAUSA'.'<br>';
                         }else{
                             $status = 1;
                             echo 'ACTIVO'.'<br>';
                         }
-                
-                    }
-                   
-
-                }                
-                   
-
-            } else {
-
-                // Si la serie no coincide, avanzar al siguiente contador y esperar
-                $cont++;
-
-                // Construye la URL de la API con el producto_id actual
-                $api_url = "https://developers.syscom.mx/api/v1/productos/".$producto_id;
-                // Realiza la consulta a la API con el token de autenticación
-                $response = file_get_contents($api_url, false, stream_context_create($options));
-                
-                // Verificar si la consulta fue exitosa
-                if ($response === FALSE) {
-                    // Manejar el error si la consulta falla
-                    echo "Error al consultar la API SYSCOM para el producto_id $producto_id<br>";
-                } else {
-                    // Procesa los datos recibidos
-                    $data = json_decode($response, true);
-
-                        // Verifica si la decodificación tuvo éxito
-                        if ($data === null) {
-                        echo "Error al decodificar el JSON para el producto_id $producto_id<br>";
-                    } else {
-                        // Accede a los datos y muestra la información
-                        $producto_id=$data['producto_id'];
-                
-                    }
-
-                    echo $data['producto_id']."<br>";                   
-
-                }                
-
-             }
             
-            // Reiniciar el contador si llega al 8
-            if ($cont > 8) {
-                $cont = 1;
+                    }
+                   
+
+                }                
+                                  
             }
-
-
+            
             echo $data['producto_id']."<br>";
             echo "PRODUCTO: ".$data['titulo'].'<br>';
             echo "STOCK: ".$data['total_existencia']."<br>";
@@ -177,7 +132,6 @@ if ($manejador) {
     
             // Convertir Titulo a texto
             $data_text = $data['titulo'];
-
             //Converit a integer las varibales
             $int_precio_descuento = intval($precio_descuento);
 
@@ -186,23 +140,22 @@ if ($manejador) {
             $sql = "INSERT INTO plataforma_ventas_temp (id_dominio, id_syscom, orden, fecha, stock, precio, inv_min, status, titulo) 
             VALUES ('$id_dominio', '$int_producto_id', '$int_orden', NOW(), '$int_stock','$int_precio_descuento','$int_inv_minimo', '$status', '$data_text')";
 
-
             if ($conn->query($sql) === TRUE) {
                 // echo "\Datos insertados correctamente en la tabla.";
             } else {
                 echo "Error al insertar datos: " . $conn->error;
             }
 
-
-        }
+        
     }
+    
     // Cerrar el archivo
     fclose($manejador);
     
     // Cierra la BD
     $conn->close();
 
-} else {
+}else {
     // Si no se puede abrir el archivo, mostrar un mensaje de error
     echo "Error: No se pudo abrir el archivo.\n";
 }

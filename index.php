@@ -7,11 +7,14 @@
     // require($laraiz."consulta_tablas.php");
     // require($laraiz."esquema_plataforma.php");
 
-    //Consulta productos
-    require($laraiz."productos.php");
+    // Consulta productos
+    // require($laraiz."familias.php");
+
+    // Consulta productos
+    require($laraiz."todos_los_productos.php");
 
 
-/*
+
     // Francisco
     require($laraiz."plataforma_ventas_proveedores.php");
 
@@ -45,7 +48,7 @@
 
     // alv agrega plataforma_ventas_tipo_de_cambio
     require($laraiz."plataforma_ventas_tipo_cambio.php");
-*/
+
 
     echo "<br><br><font size=1>Copyright: Fragolan LP 2024</font>";
 

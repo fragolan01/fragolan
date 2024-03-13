@@ -25,7 +25,7 @@
         // Manejar el error si la consulta falla
         $result = array('error' => 'Error al consultar la API SYSCOM');
     } else {
-        // Procesar los datos recibidos (en este ejemplo asumimos que la respuesta es en JSON)
+        // Procesar los datos recibidos
         $data = json_decode($response, true);
 
         // Verificar si la decodificación tuvo éxito
@@ -70,7 +70,6 @@
         } else {
             echo "No se encontró el sub-array 'subcategorias' en el JSON.";
         }   
-
 
     }
 
