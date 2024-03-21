@@ -43,20 +43,20 @@ if ($v7=="despliega") {
         // } 
 }
 
-    $tabla = 'plataforma_ventas_temp';
-    $sql = "SHOW COLUMNS FROM $tabla";
-    $result = $conn->query($sql);
+    $tabla = 'plataforma_ventas_precio';
+    $sql_columns = "DESCRIBE $tabla";
+    $result = $conn->query($sql_columns);
 
     if ($result->num_rows > 0) {
         // Mostrar los nombres de los campos
         echo "Los campos en la tabla: $tabla <br>";
         while ($row = $result->fetch_assoc()) {
-            echo $row['Field'] . "<br>";
+            echo $row['Field']. "<br>";
         }
     } else {
         echo "No se encontraron campos en la tabla.";
     }
-  
+    
 
 // Cierra la conexión
 $conn->close();

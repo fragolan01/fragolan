@@ -15,7 +15,7 @@ if ($v7=="despliega") {
     $servername = "localhost"; // Servidor de base de datos
     $username = "fragcom_develop"; // Usuario de MySQL
     $password = "S15t3ma5@Fr4g0l4N"; // Contraseña de MySQL
-    $database = "fragcom_syscom"; // base de datos
+    $database = "fragcom_develop"; // base de datos
     
     // Conexión a la base de datos
     $conn = new mysqli($servername, $username, $password, $database);
@@ -41,16 +41,31 @@ if ($v7=="despliega") {
         echo "La base de datos no tiene tablas.";
     }
  
-/*      
+    /*
     // Consulta para eliminar una tabla
-    $tabla = 'plataforma_ventas_productos';
+    $tabla = 'plataforma_ventas_precio';
     $sql = "DROP TABLE IF EXISTS $tabla";
     if ($conn->query($sql)=== TRUE){
         echo 'La tabla: '.'<strong>'. $tabla.'</strong>'.' se ha eliminado';
     }else{
         echo "Error al eliminar la tabla".$conn-error;
     }
-*/
+    */
+
+
+    /*
+    // Consulta para crear plataforma_ventas_precio
+    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_precio (
+        id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        id_dominio int(11) DEFAULT NULL,
+        id_syscom int(11) DEFAULT NULL,
+        precio DEC(10,2) DEFAULT NULL,
+        fecha timestamp DEFAULT  current_timestamp
+
+    )";
+    */
+    
+
 
 /*
     // Consulta para crear plataforma_ventas_productos
