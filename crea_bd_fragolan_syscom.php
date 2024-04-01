@@ -41,30 +41,34 @@ if ($v7=="despliega") {
         echo "La base de datos no tiene tablas.";
     }
  
-    /*
+/*    
     // Consulta para eliminar una tabla
-    $tabla = 'plataforma_ventas_precio';
+    $tabla = 'plataforma_ventas_tipo_cambio';
     $sql = "DROP TABLE IF EXISTS $tabla";
     if ($conn->query($sql)=== TRUE){
         echo 'La tabla: '.'<strong>'. $tabla.'</strong>'.' se ha eliminado';
     }else{
         echo "Error al eliminar la tabla".$conn-error;
     }
-    */
+*/
 
 
-    /*
-    // Consulta para crear plataforma_ventas_precio
-    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_precio (
+    // Consulta para crear plataforma_ventas_tipo_cambio
+    $sql = "CREATE TABLE IF NOT EXISTS plataforma_ventas_tipo_cambio (
         id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
         id_dominio int(11) DEFAULT NULL,
-        id_syscom int(11) DEFAULT NULL,
-        precio DEC(10,2) DEFAULT NULL,
-        fecha timestamp DEFAULT  current_timestamp
-
+        id_producto int(11) DEFAULT NULL,
+        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        normal decimal(10,0) DEFAULT NULL,
+        preferencial decimal(10,0) DEFAULT NULL,
+        un_dia decimal(10,0) DEFAULT NULL,
+        una_semana decimal(10,0) DEFAULT NULL,
+        dos_semanas decimal(10,0) DEFAULT NULL,
+        tres_semanas decimal(10,0) DEFAULT NULL,
+        un_mes decimal(10,0) DEFAULT NULL
     )";
-    */
-    
+
+       
 
 
 /*

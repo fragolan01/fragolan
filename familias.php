@@ -1,4 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Boton con CSS</title>
+    <style>
+        /* Estilo para los botones */
+        form {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+
 <?php
+
+echo '<form action="index.php" method="post">';
+    echo '<input type="submit" name="consulta_btn" value="Inicio">';
+echo '</form>';
+echo '<br>';
+
 
 $servername = "localhost"; // Servidor de base de datos
 $username = "fragcom_develop"; // Usuario de MySQL
@@ -62,6 +99,23 @@ if ($response_tc === FALSE) {
 
     // Acceder a los datos
     echo "TIPO DE CAMBIO: ".$data['normal']."<br><br> ";
+
+    // Convertir a float decimal
+    $float_tc = floatval($data['normal']);
+
+    // Insertando datos en tabla plataforma_ventas_temp
+    $sql = "INSERT INTO plataforma_ventas_tipo_cambio (id_dominio, fecha, normal) 
+    VALUES ('$id_dominio', NOW(), '$float_tc')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Si la interceccion fue exitosa  
+        $conn->commit();
+    echo "Tipo de cambio insertado correctamente.";
+    } else {
+        // Si falla la inserción en plataforma_ventas_precio, hacer rollback
+        $conn->rollback();
+        echo "Error al insertar tipo de cambio plataforma_ventas_tipo_de_cambio: " . $conn->error;
+    }    
 
 }
 
