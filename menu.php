@@ -47,16 +47,16 @@ error_reporting(E_ALL);
 // echo '</form>';
 
 echo '<form action="familias.php" method="post">';
-echo '<input type="submit" name="familias_btn" value="Productos SYSCOM">';
+echo '<input type="submit" name="familias_btn" value="Genera Consulta">';
 echo '</form>';
 
 echo '<form action="todos_los_productos.php" method="post">';
-echo '<input type="submit" name="productos_btn" value="Todos los Productos">';
+echo '<input type="submit" name="productos_btn" value="Muestra Consulta">';
 echo '</form>';
 
-// echo '<form action="ejemplo_orden.php" method="post">';
-// echo '<input type="submit" name="ejemplo_btn" value="Inserta">';
-// echo '</form>';
+echo '<form action="descarga_consulta.php" method="post">';
+echo '<input type="submit" name="ejemplo_btn" value="Descarga CSV">';
+echo '</form>';
 
 // echo '<form action="tipo_de_cambio.php" method="post">';
 // echo '<input type="submit" name="tipo_de_cambio" value="Tipo de Cambio">';
