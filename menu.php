@@ -50,12 +50,24 @@ echo '<form action="familias.php" method="post">';
 echo '<input type="submit" name="familias_btn" value="Genera Consulta">';
 echo '</form>';
 
+echo '<form action="genera_reporte_stock.php" method="post">';
+echo '<input type="submit" name="genera_reporte_btn" value="Genera Consulta Stock">';
+echo '</form>';
+
 echo '<form action="todos_los_productos.php" method="post">';
 echo '<input type="submit" name="productos_btn" value="Muestra Consulta">';
 echo '</form>';
 
+echo '<form action="detalles_stock.php" method="post">';
+echo '<input type="submit" name="detalle_btn" value="Detalle Stock Syscom">';
+echo '</form>';
+
 echo '<form action="descarga_consulta.php" method="post">';
-echo '<input type="submit" name="ejemplo_btn" value="Descarga CSV">';
+echo '<input type="submit" name="descarga_btn" value="Descarga CSV">';
+echo '</form>';
+
+echo '<form action="descarga_consulta.php" method="post">';
+echo '<input type="submit" name="descarga_btn" value="Descarga CSV">';
 echo '</form>';
 
 // echo '<form action="tipo_de_cambio.php" method="post">';
