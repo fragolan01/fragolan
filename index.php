@@ -4,17 +4,18 @@
 
     // alv agrega la consulta de la API SYSCOM
     // require($laraiz."crea_bd_fragolan_syscom.php");
-    // require($laraiz."alter_table.php");
+    // require($laraiz."consulta_precio.php");
     // require($laraiz."esquema_plataforma.php");
+
+    // Consulta productos
+    // require($laraiz."alter_table.php");
+
 
     // Consulta productos
     require($laraiz."menu.php");
 
     // Consulta productos
     // require($laraiz."todos_los_productos.php");
-
-    // Consulta productos
-    // require($laraiz."consulta_precio.php");
 
     
 /*

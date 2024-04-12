@@ -240,8 +240,9 @@ if ($manejador) {
                 echo "Error al insertar datos en plataforma_ventas_temp: " . $conn->error;
             }
 
-        
+    
     }
+    
     // Cerrar el archivo
     fclose($manejador);
     

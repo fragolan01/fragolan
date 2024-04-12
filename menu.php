@@ -7,6 +7,10 @@ error_reporting(E_ALL & ~E_WARNING);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+
+   // Consulta productos
+//    require($laraiz."alter_table.php");
 ?>
 
 <!DOCTYPE html>
@@ -42,16 +46,16 @@ error_reporting(E_ALL);
 <?php
 
 
-// echo '<form action="consulta_productos.php" method="post">';
-// echo '<input type="submit" name="consulta_btn" value="Productos en Pausa">';
-// echo '</form>';
+echo '<form action="alter_table.php" method="post">';
+echo '<input type="submit" name="consulta_table" value="Describe Tabla">';
+echo '</form>';
 
 echo '<form action="familias.php" method="post">';
 echo '<input type="submit" name="familias_btn" value="Genera Consulta">';
 echo '</form>';
 
 echo '<form action="genera_reporte_stock.php" method="post">';
-echo '<input type="submit" name="genera_reporte_btn" value="Genera Consulta Stock">';
+echo '<input type="submit" name="genera_reporte_btn" value="Genera Reporte Stock">';
 echo '</form>';
 
 echo '<form action="todos_los_productos.php" method="post">';
@@ -59,16 +63,17 @@ echo '<input type="submit" name="productos_btn" value="Muestra Consulta">';
 echo '</form>';
 
 echo '<form action="detalles_stock.php" method="post">';
-echo '<input type="submit" name="detalle_btn" value="Detalle Stock Syscom">';
+echo '<input type="submit" name="detalle_btn" value="Detalle Reporte Stock">';
 echo '</form>';
 
-echo '<form action="descarga_consulta.php" method="post">';
-echo '<input type="submit" name="descarga_btn" value="Descarga CSV">';
-echo '</form>';
 
-echo '<form action="descarga_consulta.php" method="post">';
-echo '<input type="submit" name="descarga_btn" value="Descarga CSV">';
-echo '</form>';
+// echo '<form action="descarga_consulta.php" method="post">';
+// echo '<input type="submit" name="descarga_btn" value="Descarga CSV">';
+// echo '</form>';
+
+// echo '<form action="descarga_consulta.php" method="post">';
+// echo '<input type="submit" name="descarga_btn" value="Descarga CSV">';
+// echo '</form>';
 
 // echo '<form action="tipo_de_cambio.php" method="post">';
 // echo '<input type="submit" name="tipo_de_cambio" value="Tipo de Cambio">';

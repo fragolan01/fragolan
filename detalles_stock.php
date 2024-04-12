@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Boton con CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle stock syscom</title>
+
     <style>
         /* Estilo para los botones */
         form {
@@ -24,233 +26,221 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
-    </style>
-</head>
-<body>
 
+        table {
+            width: 100%; /* Aumenta el ancho de la tabla */
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            position: sticky; /* Fija el encabezado */
+            top: 0; /* Asegura que el encabezado esté en la parte superior */
+            z-index: 1; /* Asegura que el encabezado esté por encima del contenido */
+        }
+    </style>
+
+</head>
+<h1><center>DETALLE PRODUCTOS SYSCOM</center></h1>
+<body>
+    
+</body>
+</html>
 
 <?php
 
-echo '<form action="index.php" method="post">';
-    echo '<input type="submit" name="consulta_btn" value="Inicio">';
+echo '<form action="menu.php" method="post">';
+echo '<input type="submit" name="menu" value="inicio ">';
+echo "\t";
+echo '<form action="menu.php" method="post">';
+echo '<input type="submit" name="menu" value="Descarga reporte ">';
 echo '</form>';
 echo '<br>';
 
 
+// Realiza la conexión a la base de datos y demás configuraciones necesarias
 $servername = "localhost"; // Servidor de base de datos
 $username = "fragcom_develop"; // Usuario de MySQL
 $password = "S15t3ma5@Fr4g0l4N"; // Contraseña de MySQL
 $database = "fragcom_develop"; // base de datos
+
 // Conexión a la base de datos
 $conn = new mysqli($servername, $username, $password, $database);
-// Verifica la conexión
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
 
-// Token de autenticación
-$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM1NmU3OTkwNmJkYjJjYWNhYTJjMWM5MjZmZGNjM2M4ZmEzNzQ4ZGY0Y2VjZWUxOGQzMWFlY2Q3MWViODJmMjFmMWY3ZDBhMGJlZDk1NzkxIn0.eyJhdWQiOiJ5ZmQwS1g4U1REYUtPZEJ0cHB2UG4wSWVFeUdiVW1CVCIsImp0aSI6IjM1NmU3OTkwNmJkYjJjYWNhYTJjMWM5MjZmZGNjM2M4ZmEzNzQ4ZGY0Y2VjZWUxOGQzMWFlY2Q3MWViODJmMjFmMWY3ZDBhMGJlZDk1NzkxIiwiaWF0IjoxNzA2NTUxMzA3LCJuYmYiOjE3MDY1NTEzMDcsImV4cCI6MTczODA4NzMwNiwic3ViIjoiIiwic2NvcGVzIjpbXX0.jhALtrRj_tkgNVj6CZxuEAnWxG6qpUMeOrXZvRbLU7B5prHrc-zPmn4lLcaEDDgfWRTXHEyQrN1nRpO8EQLuBug1kUJm-mwCkPhFMb4U6c7u_S4O0WWB4bNrRv_CQpz1Vdvic1pIJB5PDurPrzG2KbHlzfogdeYWolCKFShqPH5eehoJ0MwJ5AlL83AqpFhqzeprjB0K9eGJMx3a5jc8fYZxQm7jgh1uNk4LfaapuMos23IWczeC_1uQ3Y1XW1yuYaHXY5f9N5RA_IfBULEQ-ya8UL7Bem1ntWRegx1oIQ2M1sGz5hsdyiepI313K61rGa9khk_wI9bmwBwHxca4X_sIMT_sdJ9yOVzgXMRFfG-QlvhNWK-4xDldbo52uYwxu094cwTFZijk9NmNQq-WfPNyHEzmBrL7lSmuPVSqokggA0LjvHPnXmYCz30NxonC-zSgVp_SEBcF7rw0qo5oKe7VDj0GmPHeNV9T1n8IfFo7LaALHfyw4KAwivecMh9XY5GC_IYBLWrjAwqystUW2uiVS660t7mDqvfKonFjgjZyVuakVU4MDBXOJEzF9FVahBUc_MqXVvWbiYWDtVCnzj6rwiaXzLplEFnH4ntsCveizJmcQCF-hPRKHKprEJQFfN7E1TK3kWM0Mfei_URjiklr1J0lR6NmsSvF-q165mE";
 
-//Dominio
+// Dominio
 $id_dominio=9999;
+
 // Archivo .txt
 $archivo = 'lista_ids_detalle.txt';
+
 // Abrir el archivo en modo lectura
-$manejador = fopen($archivo, 'r');
+$manejador = fopen($archivo, 'r',FILE_IGNORE_NEW_LINES);
+
 // Fecha
 date_default_timezone_set('America/Mexico_city');
-$fecha = $fecha = new DateTime();
-// Establecer el límite de tiempo a 10 minutos
-set_time_limit(600);
+$fecha = new DateTime();
+
+// Establece el límite de tiempo a 300 segundos (5 minutos)
+set_time_limit(300); 
+
 // Definir la frecuencia de serie en segundos (2.5 minuto)
 $frecuencia_serie = 120; 
+
 // Dolar
 $dolar = 0.0;
-// url tipo de cambio
-$tipo_de_cambio = "https://developers.syscom.mx/api/v1/tipocambio";
+
 //Descuento
 $descuento = 0.04;
 
-
-// Configurar opciones para la solicitud HTTP
-$options = array(
-    'http' => array(
-        'header'  => "Authorization: Bearer $token\r\n",
-        'method'  => 'GET'
-    )
-);
-// Crear contexto de flujo
-$context = stream_context_create($options);
-$response_tc = file_get_contents($tipo_de_cambio, false, $context);
+//IVA
+$iva = 0.16;
 
 
-// Verificar si la consulta fue exitosa
-if ($response_tc === FALSE) {
-    // Manejar el error si la consulta falla
-    $result = array('error' => 'Error al consultar la API SYSCOM');
+$sql_tc = "
+SELECT fecha, normal
+FROM plataforma_ventas_tipo_cambio AS t1 
+WHERE t1.fecha = (
+    SELECT MAX(t1.fecha) 
+    FROM plataforma_ventas_tipo_cambio AS t1)
+";
+
+$result = $conn->query($sql_tc);
+
+if( $result->num_rows > 0 ){
+    echo '<table>';
+    echo '<tr><th>Fecha Consulta</th><th>T.C</th><th>IVA</th></tr>';
+    while($row = $result->fetch_assoc()){
+        echo '<tr>';
+        echo '<td>' . $row["fecha"] . '</td>';
+        echo '<td>' . $row["normal"] . '</td>';
+        $float_tc = floatval($row["normal"]);
+        echo '<td>' . "16%" . '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
 } else {
-    // Procesar los datos recibidos (en este ejemplo asumimos que la respuesta es en JSON)
-    $data = json_decode($response_tc, true);
-
-    // Verificar si la decodificación tuvo éxito
-    if ($data === null) {
-        die('Error al decodificar el JSON');
-    }
-
-    // Acceder a los datos
-    echo "TIPO DE CAMBIO: ".$data['normal']."<br><br> ";
-
-    // Convertir a float decimal
-    $float_tc = floatval($data['normal']);
-
-    // Insertando datos en tabla plataforma_ventas_temp
-    $sql = "INSERT INTO plataforma_ventas_tipo_cambio (id_dominio, fecha, normal) 
-    VALUES ('$id_dominio', NOW(), '$float_tc')";
-
-    if ($conn->query($sql) === TRUE) {
-        // Si la interceccion fue exitosa  
-        $conn->commit();
-    echo "Tipo de cambio insertado correctamente.";
-    } else {
-        // Si falla la inserción en plataforma_ventas_precio, hacer rollback
-        $conn->rollback();
-        echo "Error al insertar tipo de cambio plataforma_ventas_tipo_de_cambio: " . $conn->error;
-    }    
-
+    echo "No se encontraron resultados";
 }
 
+echo "<br><br>";
 
-// Verificar si el archivo se abrió correctamentee
-if ($manejador) {
+$sql = "
+    SELECT
+        t1.orden,
+        t1.fecha,
+        t1.id_syscom,
+        t1.titulo,
+        t1.stock,
+        t1.inv_min,
+        t1.status,
+        t1.precio AS precio_hoy,
+        t1.mxn_tot_venta,
+        (SELECT precio FROM plataforma_ventas_temp WHERE id_syscom = t1.id_syscom AND fecha < t1.fecha ORDER BY fecha DESC LIMIT 1) AS precio_anterior,
+        t1.precio - COALESCE((SELECT precio FROM plataforma_ventas_temp WHERE id_syscom = t1.id_syscom AND fecha < t1.fecha ORDER BY fecha DESC LIMIT 1), 0) AS precio_difference
+    FROM (
+        SELECT
+            status,
+            id_syscom,
+            titulo,
+            stock,
+            inv_min,
+            fecha,
+            precio,
+            mxn_tot_venta,
+            orden,
+            ROW_NUMBER() OVER (PARTITION BY id_syscom ORDER BY fecha DESC) AS rn
+        FROM plataforma_ventas_temp
+    ) AS t1
+    WHERE t1.rn = 1
+    ORDER BY t1.orden
+";
 
-    // Leer el archivo línea por línea
-    while (($linea = fgets($manejador)) !== false) {
+$result_all = $conn->query($sql);
 
-        // Dividir la línea en tres partes usando el tabulador como delimitador
-        $partes = explode("\t", $linea);
-        
-        // Verificar si hay tres partes (orden y producto_id)
-        if (count($partes) == 3) {
-            // Extraer los primeros 5 dígitos de cada número
-            $orden = substr($partes[0], 0, 5);
-            $producto_id = trim($partes[1]);
-            $ìnv_minimo = trim($partes[2]);
-            
-                // Construye la URL de la API con el producto_id actual
-                $api_url = "https://developers.syscom.mx/api/v1/productos/".$producto_id;
-                // Realiza la consulta a la API con el token de autenticación
-                $response = file_get_contents($api_url, false, stream_context_create($options));
-                
-                // Verificar si la consulta fue exitosa
-                if ($response === FALSE) {
-                    // Manejar el error si la consulta falla
-                    echo "Error al consultar la API SYSCOM para el producto_id $producto_id<br>";
-                } else {
-                    // Procesa los datos recibidos
-                    $data = json_decode($response, true);
+if($result_all-> num_rows > 0){
+    echo '<table>';
+    echo '<tr>
+            <th><center>ORDEN</center></th>
+            <th><center>ID_SYSCOM</center></th>
+            <th><center>NOMBRE</center></th>
+            <th><centr>STOCK</center></th>
+            <th><center>INV. MINIMO</center></th>
+            <th><center>STATUS</center></th>
+            <th><center>PRECIO AYER (USD)</center></th>
+            <th><center>PRECIO HOY (USD)</center></th>
+            <th><center>DIFERENCIA (USD)</center></th>
+            <th><center>IVA (USD)</center></th>
+            <th><center>TOTAL (USD)</center></th>
+            <th><center>COSTO (MXN)</center></th>
+            <th><center> TOT VENTA (MXN)</center></th>
+            <th><center> UTILIDAD (MXN)</center></th>
+        </tr>';
 
-                    // ***PRECIO
-                    $array = json_decode($response, true);
-                    $precios = $array['precios']; 
+    while($row = $result_all->fetch_assoc()) {
+        echo "<tr>";    
+            echo "<td><center>" . $row['orden'] . "</td></center>";
+            echo "<td><center>" . $row['id_syscom'] . "</td></center>";
+            echo "<td>" . $row['titulo'] . "</td>";
+            echo "<td><center>" . $row['stock'] . "</td></center>";
+            echo "<td><center>" . $row['inv_min'] . "</td></center>";
 
-                    // ***PRECIO
-                    if (is_array($precios) && array_key_exists('precio_descuento', $precios)) {
-                        // Guarda el precio_descuento para imprimirlo al final
-                        $precio_descuento = $precios['precio_descuento'];
-                    } else {
-                        echo "No se pudo acceder al precio de descuento.<br>";
-                    }
-            
-                    // Verifica si la decodificación tuvo éxito
-                    if ($data === null) {
-                        echo "Error al decodificar el JSON para el producto_id $producto_id<br>";
-                    } else {
-                        // Accede a los datos y muestra la información
-                        $producto_id=$data['producto_id'];
-                        $stock = ['total_existencia'];
-                        $titulo =['titulo'];
-
-                        //Converit a integer las varibales
-                        $int_orden = intval($orden);
-                        $int_producto_id = intval($data['producto_id']);
-                        $int_stock = intval($data['total_existencia']);
-                        $int_inv_minimo = intval($ìnv_minimo); 
-
-                        // Valida producto ACTIVO o en PAUSA
-                        if($int_stock < $ìnv_minimo){
-                                $status = 0;
-                                echo 'PAUSA'.'<br><br>';
-                        }else{
-                            $status = 1;
-                            echo 'ACTIVO'.'<br><br>';
-                        }
-            
-                    }
-                   
-
-                }                
-                                  
-            }
-            
-            echo $data['producto_id']."<br>";
-            echo "PRODUCTO: ".$data['titulo'].'<br>';
-            echo "STOCK: ".$data['total_existencia']."<br>";
-            echo 'INV. MINI: '.$ìnv_minimo.'<br>';
-
-            // ***PRECIO
-            if (isset($precio_descuento)) {
-                echo "PRECIO: " . $precio_descuento.'<br>';
-                echo $fecha->format('Y-m-d H:i:s');
-                echo "<br>";
-
-            }
+            echo "<td>"; 
+            if ($row['status'] == 1) {
+                echo "<b><center><font color=green> ACTIVO</font></b></center>";
     
-            // Convertir Titulo a texto
-            $data_text = $data['titulo'];
-
-            //Converit a integer las varibales
-            $float_precio_descuento = floatval($precio_descuento);
-          
-            // Calcula PRECIO con descuento
-            $precio_con_descuento = $float_precio_descuento - ($precio_descuento * $descuento);
-            
-            // Insertando datos en tabla plataforma_ventas_temp
-            $sql_temp = "INSERT INTO plataforma_ventas_temp (id_dominio, id_syscom, orden, fecha, stock, precio, inv_min, status, titulo) 
-                         VALUES ('$id_dominio', '$int_producto_id', '$int_orden', NOW(), '$int_stock', $precio_con_descuento, '$int_inv_minimo', '$status', '$data_text')";
-
-            if ($conn->query($sql_temp) === TRUE) {
-                // Insertar datos en la tabla plataforma_ventas_precio
-                $sql_precio  = " INSERT INTO plataforma_ventas_precio (id_dominio, id_syscom, precio, fecha ) 
-                        VALUES ('$id_dominio', '$int_producto_id', $precio_con_descuento, NOW() )";
-
-
-                if ($conn->query($sql_precio) === TRUE) {
-                    // Si ambas inserciones fueron exitosas, realizar el commit
-                    $conn->commit();
-                    echo "Datos insertados correctamente en ambas tablas.";
-                } else {
-                    // Si falla la inserción en plataforma_ventas_precio, hacer rollback
-                    $conn->rollback();
-                    echo "Error al insertar datos en plataforma_ventas_precio: " . $conn->error;
-                }
-        
+            } elseif ($row['status'] == 0) {
+                echo "<b><center><font  color=red> PAUSA</font></b></center>";
+    
             } else {
-                // Si falla la inserción en plataforma_ventas_temp, hacer rollback
-                $conn->rollback();
-                echo "Error al insertar datos en plataforma_ventas_temp: " . $conn->error;
+                echo 'Desconocido'; // Si el estado no es ni 0 ni 1
             }
+            "</td>";
 
+            echo "<td><center>" . $row['precio_anterior'] . "</td></center>";
+            echo "<td><center>" . $row['precio_hoy']. "</td><center>";
+
+            echo "<td><center>";
+                if($row['precio_difference']<0){
+                    echo "<b><center> <font color=green>" . $row['precio_difference'] . "</font></b><center>";
+                }elseif($row['precio_difference']>0){
+                    echo "<b><center> <font color=red>" ."+". $row['precio_difference'] . "</font></b><center>";
+                }else{
+                    echo "<b><center><font >  S/C </font></b></center>";
+                }
+            "</td><center>";
+            $precio_iva = round(floatval($row['precio_hoy']*$iva), 2, PHP_ROUND_HALF_UP);
+            $precio_total = round(floatval($precio_iva) + floatval($row["precio_hoy"]), 2, PHP_ROUND_HALF_UP);
+            $costo_total_mxn = $precio_total * $float_tc;
+
+
+            echo "<td><center>". $precio_iva ."</td></center>";
+            echo "<td><center>". $precio_total."</td></center>";
+            echo "<td><center>". round($costo_total_mxn, 2, PHP_ROUND_HALF_DOWN)."</td></center>";
+            echo "<td><center>". $mxn_tot_venta = floatval($row['mxn_tot_venta'])."</td></center>";
+
+            echo "<td><center>"; 
+                    $utilidad = floatval($mxn_tot_venta) - floatval($costo_total_mxn);
+                    $utilidad_round = round($utilidad, 2, PHP_ROUND_HALF_UP);
+
+                    if($utilidad_round>0){
+                        echo "<b><center> <font color=green>" . $utilidad_round . "</font></b><center>";
+                    }elseif($utilidad_round<0){
+                        echo "<b><center> <font color=red>". $utilidad_round . "</font></b><center>";
+                    }else{
+                        echo "<b><center><font >  S/C </font></b></center>";
+                    }
         
+            echo "</td></center>";
+
+        echo"</tr>";
     }
-    // Cerrar el archivo
-    fclose($manejador);
-    
-    // Cierra la BD
-    $conn->close();
-
-}else {
-    // Si no se puede abrir el archivo, mostrar un mensaje de error
-    echo "Error: No se pudo abrir el archivo.\n";
 }
-
 ?>

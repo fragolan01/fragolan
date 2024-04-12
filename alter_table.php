@@ -12,8 +12,9 @@ if ($v7=="despliega") {
     $password = "S15t3ma5@Fr4g0l4N"; // Contraseña de MySQL
     $database = "fragcom_develop"; // base de datos
 
-    $tabla = 'plataforma_ventas_temp';
-    $columna = 'mxn_tot_venta';
+    // Tabla y columna
+    $tabla = 'plataforma_ventas_tipo_cambio';
+    $columna = 'normal';
     
     // Conexión a la base de datos
     $conn = new mysqli($servername, $username, $password, $database);
@@ -38,11 +39,11 @@ if ($v7=="despliega") {
         echo "La base de datos no tiene tablas.";
     }    
 
-    // $sql_drop_column = "ALTER TABLE $tabla DROP COLUMN $columna";
-    // $result_drop = $conn->query($sql_drop_column);
+    $sql_drop_column = "ALTER TABLE $tabla MODIFY COLUMN $columna DEC(10,2)";
+    $result_drop = $conn->query($sql_drop_column);
 
-    $sql_add_column = "ALTER TABLE $tabla ADD COLUMN $columna DEC(10,6)";
-    $result_add_column = $conn->query($sql_add_column);
+    // $sql_add_column = "ALTER TABLE $tabla ADD COLUMN $columna DEC(10,6)";
+    // $result_add_column = $conn->query($sql_add_column);
     
 }
     
@@ -52,7 +53,7 @@ if ($v7=="despliega") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Descripción de la tabla plataforma_ventas_temp</title>
+    <title>Descripción de la tabla plataforma_ventas_tipo_cambio</title>
     <style>
         table {
             width: 100%;
@@ -70,7 +71,7 @@ if ($v7=="despliega") {
 </head>
 <body>
 
-<h2>Descripción de la tabla plataforma_ventas_temp</h2>
+<h2>Descripción de la tabla plataforma_ventas_tipo_cambio</h2>
 
 <table>
     <tr>
@@ -84,7 +85,7 @@ if ($v7=="despliega") {
     
     <?php
 
-    $tabla = 'plataforma_ventas_temp';
+    $tabla = 'plataforma_ventas_tipo_cambio';
     $sql = 'SHOW TABLES';
     $sql_columns = "describe $tabla";
     $result = $conn->query($sql_columns);
