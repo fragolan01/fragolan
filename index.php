@@ -17,11 +17,10 @@
     // Consulta productos
     // require($laraiz."todos_los_productos.php");
 
-    
-/*
+
     // Francisco
     require($laraiz."plataforma_ventas_proveedores.php");
-
+/*
     // alv agrega plataforma ventas envios
     require($laraiz."plataforma_ventas_envios.php");
 

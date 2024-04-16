@@ -9,8 +9,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-   // Consulta productos
-//    require($laraiz."alter_table.php");
 ?>
 
 <!DOCTYPE html>
@@ -37,34 +35,59 @@ error_reporting(E_ALL);
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #7f69a5;
         }
     </style>
 </head>
 <body>
 
 <?php
+$id_dominio=9999;
+
+$v7="despliega";
+
+if (!$v7) {
+	$v7="despliega";
+}
 
 
-echo '<form action="alter_table.php" method="post">';
-echo '<input type="submit" name="consulta_table" value="Describe Tabla">';
-echo '</form>';
+if ($v7=="despliega") {
 
-echo '<form action="familias.php" method="post">';
-echo '<input type="submit" name="familias_btn" value="Genera Consulta">';
-echo '</form>';
 
-echo '<form action="genera_reporte_stock.php" method="post">';
-echo '<input type="submit" name="genera_reporte_btn" value="Genera Reporte Stock">';
-echo '</form>';
+    echo '<form action="familias.php" method="post">';
+    echo '<input type="submit" name="familias_btn" value="Genera Consulta">';
+    echo '</form>';
 
-echo '<form action="todos_los_productos.php" method="post">';
-echo '<input type="submit" name="productos_btn" value="Muestra Consulta">';
-echo '</form>';
+    
+	echo "<br><br>";
+    echo '<form action="todos_los_productos.php" method="post">';
+        echo '<input type="submit" name="productos_btn" value="Muestra Consulta">';
+    echo '</form>';
+
+
+}
+
+
+// echo '<form action="alter_table.php" method="post">';
+// echo '<input type="submit" name="consulta_table" value="Describe Tabla">';
+// echo '</form>';
+
+
+
+// echo '<form action="genera_reporte_stock.php" method="post">';
+// echo '<input type="submit" name="genera_reporte_btn" value="Genera Reporte Stock">';
+// echo '</form>';
+
+// echo '<form action="todos_los_productos.php" method="post">';
+// echo '<input type="submit" name="productos_btn" value="Muestra Consulta">';
+// echo '</form>';
 
 echo '<form action="detalles_stock.php" method="post">';
 echo '<input type="submit" name="detalle_btn" value="Detalle Reporte Stock">';
 echo '</form>';
+
+echo "<br>";
+echo "<br>";
 
 
 // echo '<form action="descarga_consulta.php" method="post">';

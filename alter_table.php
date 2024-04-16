@@ -13,7 +13,7 @@ if ($v7=="despliega") {
     $database = "fragcom_develop"; // base de datos
 
     // Tabla y columna
-    $tabla = 'plataforma_ventas_tipo_cambio';
+    $tabla = 'plataforma_ventas_temp';
     $columna = 'normal';
     
     // Conexión a la base de datos
@@ -39,8 +39,8 @@ if ($v7=="despliega") {
         echo "La base de datos no tiene tablas.";
     }    
 
-    $sql_drop_column = "ALTER TABLE $tabla MODIFY COLUMN $columna DEC(10,2)";
-    $result_drop = $conn->query($sql_drop_column);
+    // $sql_drop_column = "ALTER TABLE $tabla MODIFY COLUMN $columna DEC(10,2)";
+    // $result_drop = $conn->query($sql_drop_column);
 
     // $sql_add_column = "ALTER TABLE $tabla ADD COLUMN $columna DEC(10,6)";
     // $result_add_column = $conn->query($sql_add_column);
@@ -85,7 +85,7 @@ if ($v7=="despliega") {
     
     <?php
 
-    $tabla = 'plataforma_ventas_tipo_cambio';
+    $tabla = 'plataforma_ventas_temp';
     $sql = 'SHOW TABLES';
     $sql_columns = "describe $tabla";
     $result = $conn->query($sql_columns);

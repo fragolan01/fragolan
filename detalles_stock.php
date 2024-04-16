@@ -17,14 +17,14 @@
             font-size: 16px;
             cursor: pointer;
             background-color: #007bff;
-            color: #fff;
+            color: #7f69a5;
             border: none;
             border-radius: 4px;
             transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #7f69a5;
         }
 
         table {
@@ -40,7 +40,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #7f69a5;
             position: sticky; /* Fija el encabezado */
             top: 0; /* Asegura que el encabezado esté en la parte superior */
             z-index: 1; /* Asegura que el encabezado esté por encima del contenido */
@@ -59,10 +59,11 @@
 echo '<form action="menu.php" method="post">';
 echo '<input type="submit" name="menu" value="inicio ">';
 echo "\t";
-echo '<form action="menu.php" method="post">';
-echo '<input type="submit" name="menu" value="Descarga reporte ">';
-echo '</form>';
-echo '<br>';
+
+// echo '<form action="menu.php" method="post">';
+// echo '<input type="submit" name="menu" value="Descarga reporte ">';
+// echo '</form>';
+// echo '<br>';
 
 
 // Realiza la conexión a la base de datos y demás configuraciones necesarias
@@ -111,16 +112,46 @@ WHERE t1.fecha = (
     SELECT MAX(t1.fecha) 
     FROM plataforma_ventas_tipo_cambio AS t1)
 ";
-
 $result = $conn->query($sql_tc);
 
+$fechaConsulta = date("d-m-Y"); // Obtener la fecha actual en formato YYYY-MM-DD
 if( $result->num_rows > 0 ){
     echo '<table>';
-    echo '<tr><th>Fecha Consulta</th><th>T.C</th><th>IVA</th></tr>';
+    echo '<tr><th>FECHA CONSULTA</th><th> T.C HOY '.  $fechaConsulta.  '</th> <th>ACTUALIZA T.C</th> <th>IVA</th></tr>';
     while($row = $result->fetch_assoc()){
         echo '<tr>';
         echo '<td>' . $row["fecha"] . '</td>';
         echo '<td>' . $row["normal"] . '</td>';
+
+/*        
+        echo '</th><td>';
+            echo '<center>';
+            echo '<form action="detalles_stock" method="post ">';
+                echo '<input type="submit" name="update_tc" value="Modifica T.C. ">  ';
+                // echo'<input type="text" name="float_tc" class="input-text" placeholder="T.C." value="' . ($row["normal"]?? 0.0) . '">';
+            echo"<form>";
+            echo '</center>';
+        echo '</td>';
+*/
+
+
+        // echo "<form name='actualiza_plataforma_ventas_categos' method='post' action='index.php?v7=actualizalo&v13=".$v13."'>";
+            // echo "<nobr>categoria: <input type='text' name='categoria' value='".$data_plataforma_ventas_categos3."' size='50'><input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
+        // echo "</form>";
+
+
+        echo '</th><td>';
+            echo '<center>';
+            echo "<form name='detalles_stock' method='post' action='detalles_stock'>";
+                echo '<input type="submit" name="update_tc" value="Modifica T.C. ">  ';
+                // echo "<input type='text' name='float_tc' value='".($row["normal"]?? 0.0)."' size='50'><input type='submit' name='actualizar' value='ACTUALIZAR &raquo;'></nobr>";
+            echo "</form>";
+            echo '</center>';
+        echo '</td>';
+
+
+
+
         $float_tc = floatval($row["normal"]);
         echo '<td>' . "16%" . '</td>';
         echo '</tr>';
@@ -130,8 +161,25 @@ if( $result->num_rows > 0 ){
     echo "No se encontraron resultados";
 }
 
-echo "<br><br>";
+$tc_especial = $float_tc;
+$costo_total_mxn = 0.0;
 
+// Check if the update_tc button was clicked
+if (isset($_POST['update_tc'])) {
+    // Update the value of $float_tc
+    $tc_especial = floatval($_POST['float_tc']);
+}
+
+
+if ($tc_especial < $float_tc ) {
+    echo '<table><tr><td style="background-color: #FF0000; color: #FFFFFF; font-black: bold; text-align: center;">El TC ES MENOR A: ' . $float_tc . '</td></tr></table>';
+} elseif ($tc_especial != $float_tc) {
+    echo '<table><tr><td style="background-color: #00FF00; color: #000000; font-weight: bold; text-align: center;">El TC UTILIZADO ES : ' . $tc_especial . '</td></tr></table>';
+}
+
+
+
+echo "<br><br>";
 $sql = "
     SELECT
         t1.orden,
@@ -164,6 +212,8 @@ $sql = "
 ";
 
 $result_all = $conn->query($sql);
+
+
 
 if($result_all-> num_rows > 0){
     echo '<table>';

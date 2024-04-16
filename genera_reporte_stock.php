@@ -1,6 +1,5 @@
 <?php
 
-
 // Realiza la conexión a la base de datos y demás configuraciones necesarias
 $servername = "localhost"; // Servidor de base de datos
 $username = "fragcom_develop"; // Usuario de MySQL
@@ -26,11 +25,8 @@ $manejador = fopen($archivo, 'r',FILE_IGNORE_NEW_LINES);
 date_default_timezone_set('America/Mexico_city');
 $fecha = $fecha = new DateTime();
 
-// Establece el límite de tiempo a 300 segundos (5 minutos)
-set_time_limit(300); 
-
-// Definir la frecuencia de serie en segundos (2.5 minuto)
-$frecuencia_serie = 120; 
+// Establece el límite de tiempo a 300 segundos (10 minutos)
+set_time_limit(600); 
 
 // Dolar
 $dolar = 0.0;
@@ -40,6 +36,7 @@ $descuento = 0.04;
 
 // url tipo de cambio
 $tipo_de_cambio = "https://developers.syscom.mx/api/v1/tipocambio";
+
 
 // Configurar opciones para la solicitud HTTP
 $options = array(
@@ -52,17 +49,18 @@ $options = array(
 
 // Crear contexto de flujo
 $context = stream_context_create($options);
+
 // Realizar la consulta a la API con el token de autenticación
-$response = file_get_contents($tipo_de_cambio, false, $context);
+$response_tc = file_get_contents($tipo_de_cambio, false, $context);
 
 
 // Verificar si la consulta fue exitosa
-if ($response === FALSE) {
+if ($response_tc === FALSE) {
     // Manejar el error si la consulta falla
     $result = array('error' => 'Error al consultar la API SYSCOM');
 } else {
     // Procesar los datos recibidos (en este ejemplo asumimos que la respuesta es en JSON)
-    $data = json_decode($response, true);
+    $data = json_decode($response_tc, true);
 
     // Verificar si la decodificación tuvo éxito
     if ($data === null) {
@@ -75,23 +73,21 @@ if ($response === FALSE) {
     // Convertir a float decimal
     $float_tc = floatval($data['normal']);
 
-    // Insertando datos en tabla plataforma_ventas_temp
+    // Insertando datos en tabla plataforma_ventas_tipo_cambio
     $sql = "INSERT INTO plataforma_ventas_tipo_cambio (id_dominio, fecha, normal) 
     VALUES ('$id_dominio', NOW(), '$float_tc')";
-
     
     if ($conn->query($sql) === TRUE) {
         // Si la interceccion fue exitosa  
         $conn->commit();
     echo "Tipo de cambio insertado correctamente.";
     } else {
-        // Si falla la inserción en plataforma_ventas_precio, hacer rollback
+        // Si falla la inserción en plataforma_ventas_tipo_cambio
         $conn->rollback();
         echo "Error al insertar tipo de cambio plataforma_ventas_tipo_de_cambio: " . $conn->error;
     }    
 
 }
-
 
 // Verificar si el archivo se abrió correctamente
 if ($manejador) {
@@ -105,7 +101,6 @@ if ($manejador) {
         // Verificar si hay 4 partes
         if (count($partes) == 4) {
 
-            // Extraer los primeros 5 dígitos de cada número
             // Orden
             $orden = substr($partes[0], 0, 5);
             // ID syscom
@@ -140,8 +135,7 @@ if ($manejador) {
                 } else {
                     echo "No se pudo acceder al precio de descuento.<br>";
                 }
-        
-                
+                        
                 // Verifica si la decodificación tuvo éxito
                 if ($data === null) {
                     echo "Error al decodificar el JSON para el producto_id $producto_id<br>";
